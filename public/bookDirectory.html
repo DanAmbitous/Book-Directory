@@ -9,6 +9,44 @@
   <title>Book Directory</title>
 </head>
 <body>
-  <h1>Hello!</h1>
+  <form action="/books" method="POST">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" placeholder="Please enter book's title here" required>
+    <label for="summary">Summary</label>
+    <input type="text" id="summary" name="summary" placeholder="Please enter book's summary here" required>
+    <label for="author">Author</label>
+    <input type="text" id="author" name="author"  placeholder="Please enter book's author here" required>
+
+    <button type="submit" id="add-book">Add book</button>
+  </form>
+
+  <div class="books-container">
+
+  </div>
+
+  <!-- <table id="books-list">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Summary</th>
+        <th>Author</th>
+      </tr>
+    </thead>
+    <tbody id="books-content">
+      
+    </tbody>
+  </table> -->
+
+  <div class="get-specific-book">
+    <h2>Book Search</h2>
+
+    <label for="book-id">Book ID/Name</label>
+    <input type="text" id="book-id" placeholder="Type in the book's id or name">
+    <button type="text" id="specific-book-searcher">Submit</button>
+
+    <div id="book-output">
+
+    </div>
+  </div>
 </body>
 </html>
