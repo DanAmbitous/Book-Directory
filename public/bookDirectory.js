@@ -1,4 +1,4 @@
-async function getBook() {
+async function getAllBooks() {
   const responseFlow = await fetch('http://localhost:9865/books')
   const objectData = await responseFlow.json()
 
@@ -23,8 +23,6 @@ async function getBook() {
 async function getSpecificBook() {
   const responseFlow = await fetch(`http://localhost:9865/books/${document.querySelector('#book-id').value}`)
   const theBook = await responseFlow.json()
-  
-  console.log(theBook)
 
   document.querySelector('#book-output').innerHTML = `${theBook.title}<br>${theBook.summary}<br>${theBook.author}<br>${theBook._id}`
 }
@@ -36,16 +34,19 @@ async function postBook() {
 
   const data = { title, summary, author }
 
-  const fetching = await fetch('http://localhost:9865/books', {
+  fetch('http://localhost:9865/books', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
   })
-  const json = await fetching.json()
+}
 
-  console.log(json)
+async function deleteABook() {
+  fetch(`http://localhost:9865/books/${document.querySelector('#book-id-delete').value}`, {
+    method: 'DELETE'
+  })
 }
 
 document.addEventListener('click', event => {
@@ -56,9 +57,12 @@ document.addEventListener('click', event => {
     case "add-book":
       postBook()
       break
+    case "book-search-for-delete":
+      deleteABook()
+      break
   }
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-  getBook()
+  getAllBooks()
 })
