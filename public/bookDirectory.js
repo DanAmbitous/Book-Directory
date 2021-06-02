@@ -15,6 +15,10 @@ async function getAllBooks() {
     bookContainer.append(author)
     const bookId = document.createElement('p')
     bookId.textContent = book._id
+    const bookImage = document.createElement('img')
+    bookImage.src = "https://i.postimg.cc/CLx7LfQL/Screenshot-2021-06-01-224838.jpg"
+    bookImage.alt = `Cover of ${book.title}`
+    bookContainer.append(bookImage)
     bookContainer.append(bookId)
     document.querySelector('.books-container').append(bookContainer)
   } 

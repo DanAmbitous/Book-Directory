@@ -51,6 +51,10 @@ router.patch('/:id', getABook, async (req, res) => {
     res.book.author = req.body.author
   }
 
+  if (req.body.image != null) {
+    res.book.image = req.body.image
+  }
+
   try {
     const updatedBook = await res.book.save()
 
@@ -93,7 +97,6 @@ router.delete('/:id', getABook, async (req, res) => {
 })
 
 //Middleware to not do the DRY
-
 async function getABook(req, res, next) {
   try {
     book = await bookSchema.findById(req.params.id)
