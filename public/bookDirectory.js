@@ -43,8 +43,14 @@ async function postBook() {
   })
 }
 
-async function deleteABook() {
+function deleteABook() {
   fetch(`http://localhost:9865/books/${document.querySelector('#book-id-delete').value}`, {
+    method: 'DELETE'
+  })
+}
+
+function deleteAllBooks() {
+  fetch('http://localhost:9865/books', {
     method: 'DELETE'
   })
 }
@@ -59,6 +65,9 @@ document.addEventListener('click', event => {
       break
     case "book-search-for-delete":
       deleteABook()
+      break
+    case "delete-all":
+      deleteAllBooks()
       break
   }
 })
