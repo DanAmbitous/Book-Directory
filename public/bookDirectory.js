@@ -51,7 +51,24 @@ function deleteABook() {
 
 function deleteAllBooks() {
   fetch('http://localhost:9865/books', {
-    method: 'DELETE'
+    method: 'DELETE',
+
+  })
+}
+
+function editABook() {
+  const title = document.querySelector('#edit-title').value
+  const summary = document.querySelector('#edit-summary').value
+  const author = document.querySelector('#edit-author').value
+
+  const data = {title, summary, author}
+
+  fetch(`http://localhost:9865/books/${document.querySelector('#edit-books-id').value}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
   })
 }
 
@@ -68,6 +85,9 @@ document.addEventListener('click', event => {
       break
     case "delete-all":
       deleteAllBooks()
+      break
+    case "edit-books-button":
+      editABook()
       break
   }
 })
