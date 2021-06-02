@@ -5,32 +5,47 @@ async function getBook() {
   for (book of objectData) {    
     const bookContainer = document.createElement('div')
     const title = document.createElement('h2')
-    title.textContent = JSON.stringify(book.title)
+    title.textContent = book.title
     bookContainer.append(title)
     const summary = document.createElement('p')
-    summary.textContent = JSON.stringify(book.summary)
+    summary.textContent = book.summary
     bookContainer.append(summary)
     const author = document.createElement('p')
-    author.textContent = JSON.stringify(book.author)
+    author.textContent = book.author
     bookContainer.append(author)
     const bookId = document.createElement('p')
-    bookId.textContent = JSON.stringify(book._id)
+    bookId.textContent = book._id
     bookContainer.append(bookId)
     document.querySelector('.books-container').append(bookContainer)
   } 
 }
 
-getBook()
-
 async function getSpecificBook() {
   const responseFlow = await fetch(`http://localhost:9865/books/${document.querySelector('#book-id').value}`)
   const theBook = await responseFlow.json()
-  const bookDataJsonififed = JSON.stringify(theBook)
   
   console.log(theBook)
 
-  // document.querySelector('#book-output').textContent = bookDataJsonififed.title
-  
+  document.querySelector('#book-output').innerHTML = `${theBook.title}<br>${theBook.summary}<br>${theBook.author}<br>${theBook._id}`
+}
+
+async function postBook() {
+  const title = document.querySelector('#title').value
+  const summary = document.querySelector('#summary').value
+  const author = document.querySelector('#author').value
+
+  const data = { title, summary, author }
+
+  const fetching = await fetch('http://localhost:9865/books', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  const json = await fetching.json()
+
+  console.log(json)
 }
 
 document.addEventListener('click', event => {
@@ -38,5 +53,12 @@ document.addEventListener('click', event => {
     case "specific-book-searcher":
       getSpecificBook()
       break
+    case "add-book":
+      postBook()
+      break
   }
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  getBook()
 })
