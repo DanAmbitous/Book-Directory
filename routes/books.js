@@ -23,7 +23,8 @@ router.post('/', async (req, res) => {
   const book = new bookSchema({
     title: req.body.title,
     summary: req.body.summary,
-    author: req.body.author
+    author: req.body.author,
+    image: req.body.image
   })
 
   try {

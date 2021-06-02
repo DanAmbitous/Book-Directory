@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
   <link rel="stylesheet" href="bookDirectory.css">
   <script src="bookDirectory.js" defer></script>
   <title>Book Directory</title>
@@ -18,6 +18,12 @@
     
     <label for="author">Author</label>
     <input type="text" id="author" name="author"  placeholder="Please enter book's author here" required>
+
+    <select name="image" id="book-covers">
+      <option value="book-cover-1">Book cover 1</option>
+      <option value="book-cover-2">Book cover 2</option>
+      <option value="book-cover-3">Book cover 3</option>
+    </select>
 
     <button type="submit" id="add-book">Add book</button>
   </div>

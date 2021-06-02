@@ -16,7 +16,8 @@ async function getAllBooks() {
     const bookId = document.createElement('p')
     bookId.textContent = book._id
     const bookImage = document.createElement('img')
-    bookImage.src = "https://i.postimg.cc/CLx7LfQL/Screenshot-2021-06-01-224838.jpg"
+    console.log(document.querySelector('#book-covers').value)
+    bookImage.src = book.image
     bookImage.alt = `Cover of ${book.title}`
     bookContainer.append(bookImage)
     bookContainer.append(bookId)
@@ -28,15 +29,28 @@ async function getSpecificBook() {
   const responseFlow = await fetch(`http://localhost:9865/books/${document.querySelector('#book-id').value}`)
   const theBook = await responseFlow.json()
 
-  document.querySelector('#book-output').innerHTML = `${theBook.title}<br>${theBook.summary}<br>${theBook.author}<br>${theBook._id}`
+  document.querySelector('#book-output').innerHTML = `${theBook.title}<br>${theBook.summary}<br>${theBook.author}<br>${theBook.iamge}<br>${theBook._id}`
 }
 
 async function postBook() {
   const title = document.querySelector('#title').value
   const summary = document.querySelector('#summary').value
   const author = document.querySelector('#author').value
+  let image = document.querySelector('#book-covers').value
 
-  const data = { title, summary, author }
+  if (image === 'book-cover-1') {
+    image = 'https://i.postimg.cc/7Zxxvp8G/Screenshot-2021-06-01-224838.jpg'
+  } 
+
+  if (image === 'book-cover-2') {
+    image = 'https://i.postimg.cc/FKRH225F/Screenshot-2021-06-02-113222.jpg'
+  }
+
+  if (image === 'book-cover-3') {
+    image = 'https://i.postimg.cc/C1nLKkxW/Screenshot-2021-06-02-113243.jpg'
+  }
+
+  const data = { title, summary, author, image }
 
   fetch('http://localhost:9865/books', {
     method: 'POST',
