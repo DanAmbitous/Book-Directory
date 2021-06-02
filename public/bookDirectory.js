@@ -16,7 +16,6 @@ async function getAllBooks() {
     const bookId = document.createElement('p')
     bookId.textContent = book._id
     const bookImage = document.createElement('img')
-    console.log(document.querySelector('#book-covers').value)
     bookImage.src = book.image
     bookImage.alt = `Cover of ${book.title}`
     bookContainer.append(bookImage)
@@ -29,7 +28,7 @@ async function getSpecificBook() {
   const responseFlow = await fetch(`http://localhost:9865/books/${document.querySelector('#book-id').value}`)
   const theBook = await responseFlow.json()
 
-  document.querySelector('#book-output').innerHTML = `${theBook.title}<br>${theBook.summary}<br>${theBook.author}<br>${theBook.iamge}<br>${theBook._id}`
+  document.querySelector('#book-output').innerHTML = `${theBook.title}<br>${theBook.summary}<br>${theBook.author}<br><img src="${theBook.image}" alt="${theBook.title}"><br>${theBook._id}`
 }
 
 async function postBook() {
@@ -59,6 +58,32 @@ async function postBook() {
     },
     body: JSON.stringify(data)
   })
+
+  document.querySelector('.books-container').innerHTML = ""
+
+  const responseFlow = await fetch('http://localhost:9865/books')
+  const getData = await responseFlow.json()
+
+  for (book of getData) {    
+    const bookContainer = document.createElement('div')
+    const title = document.createElement('h2')
+    title.textContent = book.title
+    bookContainer.append(title)
+    const summary = document.createElement('p')
+    summary.textContent = book.summary
+    bookContainer.append(summary)
+    const author = document.createElement('p')
+    author.textContent = book.author
+    bookContainer.append(author)
+    const bookId = document.createElement('p')
+    bookId.textContent = book._id
+    const bookImage = document.createElement('img')
+    bookImage.src = book.image
+    bookImage.alt = `Cover of ${book.title}`
+    bookContainer.append(bookImage)
+    bookContainer.append(bookId)
+    document.querySelector('.books-container').append(bookContainer)
+  } 
 }
 
 function deleteABook() {
@@ -70,7 +95,6 @@ function deleteABook() {
 function deleteAllBooks() {
   fetch('http://localhost:9865/books', {
     method: 'DELETE',
-
   })
 }
 
