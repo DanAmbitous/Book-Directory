@@ -168,3 +168,31 @@ async function reGetBooks() {
     document.querySelector('.books-container').append(bookContainer)
   } 
 }
+
+// To automatically fill up the input elements if a matched entry is found
+document.addEventListener('keyup', async event => {
+  switch(event.target.id) {
+    case "edit-books-id":
+      const responseFlow = await fetch('http://localhost:9865/books')
+      const data = await responseFlow.json()
+
+      data.forEach(async entry => {
+        if (document.querySelector('#edit-books-id').value === entry._id) {
+          const responseFlow = await fetch(`http://localhost:9865/books/${document.querySelector('#edit-books-id').value}`)
+          const data = await responseFlow.json()
+
+          document.querySelector('#edit-title').value = data.title
+          document.querySelector('#edit-summary').value = data.summary
+          document.querySelector('#edit-author').value = data.author
+
+        }
+      })
+
+   break
+ 
+  }
+})
+
+function autofill(entryIdentifier) {
+
+}
