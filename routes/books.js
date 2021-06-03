@@ -72,8 +72,6 @@ router.delete('/', async (req, res) => {
 
     const bookStorer = books
 
-    console.log(bookStorer)
-
     await bookSchema.deleteMany()
 
     if (books.length > 0) {
