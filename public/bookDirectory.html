@@ -12,29 +12,31 @@
   <title>Book Directory</title>
 </head>
 <body>
-  <div class="add-book-inputs">
-    <h1>Add a book</h1>
-    <label for="title">Title</label>
-    <input type="text" id="title" name="title" placeholder="Please enter book's title here" required>
+  <form action="">
+    <div class="add-book-inputs">
+      <h1>Add a book</h1>
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" placeholder="Please enter book's title here" required>
 
-    <label for="summary">Summary</label>
-    <input type="text" id="summary" name="summary" placeholder="Please enter book's summary here" required>
-    
-    <label for="author">Author</label>
-    <input type="text" id="author" name="author"  placeholder="Please enter book's author here" required>
+      <label for="summary">Summary</label>
+      <input type="text" id="summary" name="summary" placeholder="Please enter book's summary here" required>
+      
+      <label for="author">Author</label>
+      <input type="text" id="author" name="author"  placeholder="Please enter book's author here" required>
 
-    <select name="image" id="book-covers">
-      <option value="choose-book-cover" data-imagesrc="https://i.postimg.cc/63Lv6pNX/Screenshot-2021-06-03-003820.jpg">Blank</option>
-      <option value="book-cover-1" data-imagesrc="https://i.postimg.cc/7Zxxvp8G/Screenshot-2021-06-01-224838.jpg">Book cover 1</option>
-      <option value="book-cover-2" data-imagesrc="https://i.postimg.cc/FKRH225F/Screenshot-2021-06-02-113222.jpg">Book cover 2</option>
-      <option value="book-cover-3" data-imagesrc="https://i.postimg.cc/C1nLKkxW/Screenshot-2021-06-02-113243.jpg">Book cover 3</option>
-    </select>
+      <select name="image" id="book-covers">
+        <option value="choose-book-cover" data-imagesrc="https://i.postimg.cc/63Lv6pNX/Screenshot-2021-06-03-003820.jpg">Blank</option>
+        <option value="book-cover-1" data-imagesrc="https://i.postimg.cc/7Zxxvp8G/Screenshot-2021-06-01-224838.jpg">Book cover 1</option>
+        <option value="book-cover-2" data-imagesrc="https://i.postimg.cc/FKRH225F/Screenshot-2021-06-02-113222.jpg">Book cover 2</option>
+        <option value="book-cover-3" data-imagesrc="https://i.postimg.cc/C1nLKkxW/Screenshot-2021-06-02-113243.jpg">Book cover 3</option>
+      </select>
 
-    <div id="myDropdown"></div>
+      <div id="myDropdown"></div>
 
-    <button type="submit" id="add-book">Add book</button>
-  </div>
-
+      <button type="submit" id="add-book">Add book</button>
+    </div>
+  </form>
+  
   <div class="get-specific-book">
     <h2>Search Book</h2>
 
@@ -55,7 +57,7 @@
     <button type="text" id="book-search-for-delete">Submit</button>
 
     <div class="deleted-book">
-      
+
     </div>
   </div>
 
@@ -63,6 +65,10 @@
     <h2>Delete all Books</h2>
 
     <button id="delete-all">Delete all Books</button>
+
+    <div class="deleted-all-books">
+
+    </div>
   </div>
 
   <div class="patch-operation-container">
