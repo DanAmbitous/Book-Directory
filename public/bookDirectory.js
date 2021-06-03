@@ -184,12 +184,13 @@ document.addEventListener('keyup', async event => {
           document.querySelector('#edit-title').value = data.title
           document.querySelector('#edit-summary').value = data.summary
           document.querySelector('#edit-author').value = data.author
-
+        } else {
+          document.querySelector('#edit-title').value = ""
+          document.querySelector('#edit-summary').value = ""
+          document.querySelector('#edit-author').value = ""
         }
       })
-
    break
- 
   }
 })
 
