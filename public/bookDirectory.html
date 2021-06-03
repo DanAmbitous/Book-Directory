@@ -5,6 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
   <link rel="stylesheet" href="bookDirectory.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" defer></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js" defer></script>
   <script src="bookDirectory.js" defer></script>
   <title>Book Directory</title>
 </head>
@@ -20,10 +23,12 @@
     <input type="text" id="author" name="author"  placeholder="Please enter book's author here" required>
 
     <select name="image" id="book-covers">
-      <option value="book-cover-1">Book cover 1</option>
-      <option value="book-cover-2">Book cover 2</option>
-      <option value="book-cover-3">Book cover 3</option>
+      <option value="book-cover-1" data-imagesrc="https://i.postimg.cc/7Zxxvp8G/Screenshot-2021-06-01-224838.jpg">Book cover 1</option>
+      <option value="book-cover-2" data-imagesrc="https://i.postimg.cc/FKRH225F/Screenshot-2021-06-02-113222.jpg">Book cover 2</option>
+      <option value="book-cover-3" data-imagesrc="https://i.postimg.cc/C1nLKkxW/Screenshot-2021-06-02-113243.jpg">Book cover 3</option>
     </select>
+
+    <div id="myDropdown"></div>
 
     <button type="submit" id="add-book">Add book</button>
   </div>
