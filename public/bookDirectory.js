@@ -15,10 +15,10 @@ async function getAllBooks() {
     bookContainer.append(author)
     const bookId = document.createElement('p')
     bookId.textContent = book._id
-    // const bookImage = document.createElement('img')
-    // bookImage.src = book.image
-    // bookImage.alt = `Cover of ${book.title}`
-    // bookContainer.append(bookImage)
+    const bookImage = document.createElement('img')
+    bookImage.src = book.image
+    bookImage.alt = `Cover of ${book.title}`
+    bookContainer.append(bookImage)
     bookContainer.append(bookId)
     document.querySelector('.books-container').append(bookContainer)
   } 
@@ -35,23 +35,21 @@ async function postBook() {
   const title = document.querySelector('#title').value
   const summary = document.querySelector('#summary').value
   const author = document.querySelector('#author').value
-  let image = document.querySelector('#book-covers').querySelector('.dd-selected-image').src
+  let image = document.querySelector('#book-covers').querySelector('.dd-selected-image').src.toString()
 
-  console.log(image)
-
-  if (image === 'book-cover-1') {
+  if (image === 'https://i.postimg.cc/7Zxxvp8G/Screenshot-2021-06-01-224838.jpg') {
     image = 'https://i.postimg.cc/7Zxxvp8G/Screenshot-2021-06-01-224838.jpg'
   } 
 
-  if (image === 'book-cover-2') {
+  if (image === 'https://i.postimg.cc/FKRH225F/Screenshot-2021-06-02-113222.jpg') {
     image = 'https://i.postimg.cc/FKRH225F/Screenshot-2021-06-02-113222.jpg'
   }
 
-  if (image === 'book-cover-3') {
+  if (image === 'https://i.postimg.cc/C1nLKkxW/Screenshot-2021-06-02-113243.jpg') {
     image = 'https://i.postimg.cc/C1nLKkxW/Screenshot-2021-06-02-113243.jpg'
   }
 
-  const data = { title, summary, author, /*image*/ }
+  const data = { title, summary, author, image }
 
   fetch('http://localhost:9865/books', {
     method: 'POST',
