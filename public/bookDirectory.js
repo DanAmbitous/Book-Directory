@@ -52,7 +52,32 @@ async function postBook() {
   reGetBooks()
 }
 
-function deleteABook() {
+async function deleteABook() {
+  const responseFlow = await fetch(`http://localhost:9865/books/${document.querySelector('#book-id-delete').value}`)
+  const data = await responseFlow.json()
+
+  // let title = document.createElement('h2')
+  // title = data.title
+
+  const bookContainer = document.createElement('div')
+  const title = document.createElement('h2')
+  title.textContent = data.title
+  bookContainer.append(title)
+  const summary = document.createElement('p')
+  summary.textContent = data.summary
+  bookContainer.append(summary)
+  const author = document.createElement('p')
+  author.textContent = data.author
+  bookContainer.append(author)
+  const bookId = document.createElement('p')
+  bookId.textContent = data._id
+  const bookImage = document.createElement('img')
+  bookImage.src = data.image
+  bookImage.alt = `Cover of ${data.title}`
+  bookContainer.append(bookImage)
+  bookContainer.append(bookId)
+  document.querySelector('.deleted-book').append(bookContainer)
+
   fetch(`http://localhost:9865/books/${document.querySelector('#book-id-delete').value}`, {
     method: 'DELETE'
   })
