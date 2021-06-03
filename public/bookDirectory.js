@@ -138,6 +138,10 @@ function imageChecker(image) {
     image = 'https://i.postimg.cc/C1nLKkxW/Screenshot-2021-06-02-113243.jpg'
   }
 
+  if (image === "https://i.postimg.cc/zfj3mRkn/Screenshot-2021-06-03-003820.jpg") {
+    image = "https://i.postimg.cc/zfj3mRkn/Screenshot-2021-06-03-003820.jpg"
+  }
+
   return image
 }
 
