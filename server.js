@@ -14,7 +14,6 @@ app.use(bodyParser.json());
 
 app.use(express.json())
 
-
 const mongoose = require('mongoose')
 
 mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true })
@@ -27,5 +26,8 @@ app.use(express.static('public'))
 
 const booksRouter = require('./routes/books')
 app.use('/books', booksRouter)
+
+const usersRouter = require('./routes/users')
+app.use('/users', usersRouter)
 
 app.listen(PORT, () => console.log(`Running server on port ${PORT}`))
