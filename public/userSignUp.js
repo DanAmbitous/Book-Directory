@@ -6,11 +6,28 @@ document.addEventListener('click', event => {
   }
 })
 
+function roleDeterminer() {
+  const role = document.querySelector('#role').value
+
+
+  if (role === "admin") {
+    console.log(role)
+
+    document.querySelector('#sign-up-form').action = "http://localhost:9865/bookDirectory.html"
+  } 
+  
+  if (role === "basic") {
+    console.log(role)
+
+    document.querySelector('#sign-up-form').action = "http://localhost:9865/bookGetter.html"
+  }
+}
+
 async function createUser() {
+  roleDeterminer()
+
   const username = document.querySelector('#username').value
   const role = document.querySelector("#role").value
-
-  console.log(username)
 
   const data = {username, role}
 
