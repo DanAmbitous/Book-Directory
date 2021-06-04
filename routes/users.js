@@ -1,4 +1,3 @@
-const { response } = require('express')
 const express = require('express')
 const router = express.Router()
 const User = require('../models/userPrototype')
@@ -22,7 +21,7 @@ router.get('/:id', getUser, (req , res) => {
 //Create a user
 router.post('/', async (req, res) => {
   const user = new User({
-    name: req.body.name,
+    username: req.body.username,
     role: req.body.role
   })
 
@@ -38,8 +37,8 @@ router.post('/', async (req, res) => {
 
 //Update a user
 router.patch('/:id', getUser, async (req, res) => {
-  if (req.body.name != null) {
-    res.user.name = req.body.name
+  if (req.body.username != null) {
+    res.user.username = req.body.username
   }
 
   if (req.body.role != null) {
@@ -60,18 +59,11 @@ router.delete('/', async (req, res) => {
   try {
     const users = await User.find()
 
+    let theUsers = []
+
     users.forEach(user => {
-      let userIndex = findIndex(user)
-
-      console.log(userIndex)
-
-      // if ()
-      theUsers.push(`${user.name}`)  
+      theUsers.push(user.username)  
     })
-
-    console.log(theUsers)
-
-    console.log(users)
 
     await User.find().deleteMany()
 
