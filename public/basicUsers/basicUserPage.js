@@ -28,21 +28,21 @@ async function getBook() {
 
 function bookRenderer(container, book) {
   const bookContainer = document.createElement('div')
-    const title = document.createElement('h2')
-    title.textContent = book.title
-    bookContainer.append(title)
-    const summary = document.createElement('p')
-    summary.textContent = book.summary
-    bookContainer.append(summary)
-    const author = document.createElement('p')
-    author.textContent = book.author
-    bookContainer.append(author)
-    const bookId = document.createElement('p')
-    bookId.textContent = book._id
-    const bookImage = document.createElement('img')
-    bookImage.src = book.image
-    bookImage.alt = `Cover of ${book.title}`
-    bookContainer.append(bookImage)
-    bookContainer.append(bookId)
-    document.querySelector(`.${container}`).append(bookContainer)
+  const title = document.createElement('h2')
+  title.textContent = book.title
+  bookContainer.append(title)
+  const summary = document.createElement('p')
+  summary.textContent = book.summary
+  bookContainer.append(summary)
+  const author = document.createElement('p')
+  author.textContent = book.author
+  bookContainer.append(author)
+  const bookId = document.createElement('p')
+  bookId.textContent = book._id
+  const bookImage = document.createElement('img')
+  bookImage.src = book.image
+  bookImage.alt = `Cover of ${book.title}`
+  bookContainer.append(bookImage)
+  bookContainer.append(bookId)
+  document.querySelector(`.${container}`).append(bookContainer)
 }

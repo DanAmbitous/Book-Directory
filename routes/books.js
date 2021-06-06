@@ -7,6 +7,10 @@ router.get('/', async (req, res) => {
   try {
     const books = await bookSchema.find()
 
+    await bookSchema.find(user => console.log(user))
+
+    console.log(books)
+
     res.json(books)
   } catch (error) {
     res.status(500).json({message: error.message})
@@ -14,7 +18,7 @@ router.get('/', async (req, res) => {
 })
 
 //Getting one
-router.get('/:id', getABook, async (req, res) => {
+router.get('/:id', getABook, (req, res) => {
   res.json(res.book)
 })
 
@@ -31,7 +35,7 @@ router.post('/', async (req, res) => {
     const newBook = await book.save()
     res.status(201).json(newBook)
   } catch (error) {
-    res.status(400).json({message: error.message}) 
+    res.status(500).json({message: error.message}) 
   }
 })
 

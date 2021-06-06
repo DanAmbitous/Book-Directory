@@ -1,0 +1,35 @@
+GET http://localhost:9865/books
+
+###
+
+GET http://localhost:9865/books/60b552d49f9b25226cc3f92e
+
+###
+
+POST http://localhost:9865/books/
+Content-Type: application/json
+
+{
+  "title": "How to not get YEETED ON",
+  "summary": "Tired of being yeeted on? Read this book for help.",
+  "author": "E",
+}
+
+###
+
+DELETE http://localhost:9865/books
+
+###
+
+DELETE http://localhost:9865/books/60b6bfbb47d08639205780e0
+
+###
+PATCH http://localhost:9865/books/60b83bba726b65476418baed
+Content-Type: application/json
+
+{
+  "title": "Top Ten Universal Facts",
+  "summary": "Are you a generally curious person? If so this book will astonish you",
+  "author": "Albert Witts",
+  "image": "https://i.postimg.cc/C1nLKkxW/Screenshot-2021-06-02-113243.jpg"
+}

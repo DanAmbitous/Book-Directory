@@ -5,6 +5,7 @@ const app = express()
 const PORT = process.env.PORT || 9865
 
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -14,8 +15,6 @@ app.use(bodyParser.json());
 
 app.use(express.json())
 
-const mongoose = require('mongoose')
-
 mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true })
 
 const db = mongoose.connection
@@ -24,6 +23,7 @@ db.once('open', () => console.log('Connected to the Database'))
 
 app.use(express.static('public'))
 
+//Route for the books restAPI
 const booksRouter = require('./routes/books')
 app.use('/books', booksRouter)
 
