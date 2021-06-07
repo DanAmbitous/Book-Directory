@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="adminUserPage.js" defer></script>
+  <title>Admin Page</title>
+</head>
+<body>
+  <h1>Admin</h1>
+
+  <div id="get-specific-user">
+    <h3>Find a specific user</h3>
+    <label for="specific-user-input">Username: </label>
+    <input type="text" id="specific-user-input">
+    <button id="search-specific-user">Search</button>
+
+    <div id="specific-user-container">
+      
+    </div>
+
+    <hr>
+  </div>
+
+  <div id="edit-specific-user">
+    <h3>Edit a specific user</h3>
+
+    <label for="specific-user-input-edit">Username: </label>
+    <input type="text" id="specific-user-input-edit">
+
+    <label for="specific-user-input-username">Username: </label>
+    <input type="text" name="username" id="specific-user-input-username">
+
+    <label for="specific-user-input-role">Role: </label>
+    <select name="role" id="specific-user-input-role">
+      <option value="admin">Admin</option>
+      <option value="basic">Basic</option>
+    </select>
+
+    <button id="search-specific-user-edit">Edit</button>
+
+    <div id="specific-user-container-edit">
+      
+    </div>
+
+    <hr>
+  </div>
+
+  <div id="delete-specific-user">
+    <h3>Delete a specific user</h3>
+
+    <label for="specific-user-input-delete">Username: </label>
+    <input type="text" id="specific-user-input-delete">
+
+    <button id="search-specific-user-delete">Delete</button>
+
+    <div id="specific-user-container-delete">
+      
+    </div>
+
+    <hr>
+  </div>
+
+  <div id="delete-all">
+    <h3>Delete all Users</h3>
+
+    <button id="delete-all-users">Delete All Users</button>
+
+    <div id="all-deleted-users">
+
+    </div>
+
+    <hr>
+  </div>
+
+  <div id="get-all-users">
+
+  </div>
+
+  <style>
+    body {
+      background-color: moccasin;
+    }
+  </style>
+</body>
+</html>

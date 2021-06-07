@@ -2,7 +2,7 @@ GET http://localhost:9865/users
 
 ###
 
-GET http://localhost:9865/users/60bd2b305d76583c1ce1c4af
+GET http://localhost:9865/users/60be7c19088fd02cc8ffe20c
 
 ###
 
@@ -11,8 +11,8 @@ POST http://localhost:9865/users
 Content-Type: application/json
 
 {
-  "username": "John",
-  "password": "password"
+  "username": "a",
+  "password": "a"
 }
 
 ###

@@ -54,7 +54,7 @@ router.post('/login', async (req, res) => {
 
   try {
     if (await bcrypt.compare(req.body.password, user.password)) {
-      res.send('Success, you have logged in!')
+      res.send(`Success, you have logged in!${user._id}`)
     } else {
       res.send('Not allowed')
     }
