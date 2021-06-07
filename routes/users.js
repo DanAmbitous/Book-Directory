@@ -27,7 +27,8 @@ router.post('/', async (req, res) => {
 
     const user = new User({
       username: req.body.username,
-      password: hashedPassword
+      password: hashedPassword,
+      role: 'basic'
     })
 
     const newUser = await user.save()
@@ -63,8 +64,24 @@ router.post('/login', async (req, res) => {
 })
 
 //Edit a user
-router.patch('/:id', (req, res) => {
-  
+router.patch('/:id', getUser, async (req, res) => {
+  if (req.body.username != null) {
+    res.user.username = req.body.username
+  }
+
+  if (req.body.role != null) {
+    res.user.role = req.body.role
+  }
+
+  try {
+    console.log(res.user)
+
+    const updatedUser = await res.user.save()
+
+    res.json(updatedUser)
+  } catch (error) {
+    res.status(400).json({message: error.message})
+  }
 })
 
 //Delete all users

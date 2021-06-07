@@ -6,6 +6,7 @@ GET http://localhost:9865/users/60bd2b305d76583c1ce1c4af
 
 ###
 
+// Sign Up
 POST http://localhost:9865/users
 Content-Type: application/json
 
@@ -16,15 +17,29 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:9865/users/login
+PATCH http://localhost:9865/users/60bd46fbefb94713101004c9
 Content-Type: application/json
 
 {
   "username": "John",
-  "password": "password"
+  "role": "admin"
 }
 
+###
+
+// Login
+POST http://localhost:9865/users/login
+Content-Type: application/json
+
+{
+  "username": "a",
+  "password": "a"
+}
 
 ###
 
 DELETE http://localhost:9865/users
+
+###
+
+DELETE http://localhost:9865/users/60bd44b28ca1aa3648327214
