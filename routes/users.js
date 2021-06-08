@@ -23,23 +23,6 @@ router.get('/username/:username', getUserByUsername, async (req, res) => {
   res.json(user)
 })
 
-/* 
-async function getUser(req, res, next) {
-  try {
-    user = await User.findById(req.params.id)
-
-    if (user == null) {
-      return res.status(404).json({message: `Can't find a user by the ID of ${req.params.id}`})
-    }
-  } catch (error) {
-    res.status(500).json({message: error.message})
-  }
-  
-  res.user = user
-  next()
-}
-*/
-
 //Create a user (Sign Up)
 router.post('/', async (req, res) => {
   try {
@@ -96,8 +79,6 @@ router.patch('/:id', getUser, async (req, res) => {
   }
 
   try {
-    console.log(res.user)
-
     const updatedUser = await res.user.save()
 
     res.json(updatedUser)

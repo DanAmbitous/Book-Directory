@@ -42,9 +42,16 @@ async function editSpecificUser() {
   const username = document.querySelector('#specific-user-input-username').value
   const role = document.querySelector('#specific-user-input-role').value
 
-  const data = {username, role}
+  const responseFlow = await fetch(`http://localhost:9865/users/username/${document.querySelector("#specific-user-input-edit").value}`)
+  const jsonData = await responseFlow.json()
 
-  await fetch(`http://localhost:9865/users/${document.querySelector("#specific-user-input-edit").value}`, {
+  const theData = jsonData[0]
+
+  const id = theData._id
+
+  const data = {username, role}
+  
+  await fetch(`http://localhost:9865/users/${id}`, {
     method: 'PATCH',
     headers: {
       "Content-Type": "application/json"
@@ -52,7 +59,7 @@ async function editSpecificUser() {
     body: JSON.stringify(data)
   })
 
-  document.querySelector('#specific-user-container').innerHTML = ""  
+  document.querySelector('#specific-user-container-delete').innerHTML = ""  
 
   const userContainer = document.createElement('div')
   const usernamePlace = document.createElement('h2')
@@ -60,7 +67,7 @@ async function editSpecificUser() {
   username.innerHTML = data.username
   role.innerHTML = data.role
   userContainer.append(usernamePlace, rolePlace)
-  document.querySelector('#specific-user-container').append(userContainer)
+  document.querySelector('#specific-user-container-delete').append(userContainer)
 
   getAllUsers()
 }
