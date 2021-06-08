@@ -23,17 +23,15 @@ async function getSpecificUser() {
   const responseFlow = await fetch(`http://localhost:9865/users/username/${document.querySelector("#specific-user-input").value}`)
   const data = await responseFlow.json()
 
-  const theDocument = data[0]
-
   document.querySelector('#specific-user-container').innerHTML = ""  
 
   const userContainer = document.createElement('div')
   const username = document.createElement('h2')
   const role = document.createElement('p')
   const id = document.createElement('p')
-  username.innerHTML = theDocument.username
-  role.innerHTML = theDocument.role
-  id.innerHTML = theDocument._id
+  username.innerHTML = data.username
+  role.innerHTML = data.role
+  id.innerHTML = data._id
   userContainer.append(username, role, id)
   document.querySelector('#specific-user-container').append(userContainer)
 }
@@ -60,7 +58,7 @@ async function editSpecificUser() {
 }
 
 async function deleteSpecificUser() {
-  const responseFlow = await fetch(`http://localhost:9865/users/${document.querySelector("#specific-user-input-delete").value}`)
+  const responseFlow = await fetch(`http://localhost:9865/users/username/${document.querySelector("#specific-user-input-delete").value}`)
   const data = await responseFlow.json()
 
   document.querySelector('#specific-user-input-delete').innerHTML = ""  
