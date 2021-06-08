@@ -139,11 +139,17 @@ async function getUserByUsername(req, res, next) {
     if (user.length == 0) {
       return res.status(404).json({message: `Can't find a user by the username of ${req.params.username}`})
     }
+
+    user = user[0]
+    
+    console.log(user)
+
   } catch (error) {
     res.status(500).json({message: error.message})
   }
 
   res.user = user
+  console.log(res.user)
   next()
 }
 

@@ -44,10 +44,7 @@ async function editSpecificUser() {
 
   const responseFlow = await fetch(`http://localhost:9865/users/username/${document.querySelector("#specific-user-input-edit").value}`)
   const jsonData = await responseFlow.json()
-
-  const theData = jsonData[0]
-
-  const id = theData._id
+  const id = jsonData._id
 
   const data = {username, role}
   
@@ -58,16 +55,6 @@ async function editSpecificUser() {
     },
     body: JSON.stringify(data)
   })
-
-  document.querySelector('#specific-user-container-delete').innerHTML = ""  
-
-  const userContainer = document.createElement('div')
-  const usernamePlace = document.createElement('h2')
-  const rolePlace = document.createElement('p')
-  username.innerHTML = data.username
-  role.innerHTML = data.role
-  userContainer.append(usernamePlace, rolePlace)
-  document.querySelector('#specific-user-container-delete').append(userContainer)
 
   getAllUsers()
 }
