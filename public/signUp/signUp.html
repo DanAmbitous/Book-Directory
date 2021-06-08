@@ -4,31 +4,40 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="signUp.css">
   <script src="signUp.js" defer></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" ></script>
   <link rel="icon" href="../images/icon.ico" type="image/x-icon">
   <title>Sign Up</title>
 </head>
 <body>
-  <h1>Sign Up</h1>
+  <div class="container">
 
-  <div id="sign-up-form">
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
+    <video id="video" autoplay loop muted>
+      <source src="../resources/signUpVideo.mp4" type="video/mp4">
+    </video>
 
-    <button id="sign-up-button">Sign Up</button>
-  </div>
+    <div id="sign-up-form">
+      <h1>Sign Up</h1>
 
-  <div id="username-error-feedback">
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" required>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required>
+  
+      <button id="sign-up-button">Sign Up</button>
 
-  </div>
-
-  <style>
-    body {
-      background-color: rgb(151, 141, 124);
-    }
-  </style>
+      <ul>
+        <li>Username must be at least 3 characters long</li>
+        <li>No more than 10 characters are allowed for the username</li>
+      </ul>
+  
+      <div id="username-error-feedback">
+    
+      </div>
+    </div>
+  
+   
+   </div>
 </body>
 </html>

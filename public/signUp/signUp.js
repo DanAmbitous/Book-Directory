@@ -14,7 +14,9 @@ async function signUserUp() {
   const username = document.querySelector('#username').value
 
   if (username.length > 10) {
-    usernameFeedback.textContent = "Your username needs to be less when 10 characters"
+    usernameFeedback.textContent = "Your username needs to be less than 10 characters"
+  } else if (username.length < 3) {
+    usernameFeedback.textContent = "Your username needs to be more than 3 characters"
   } else {
     const responseFlow = await fetch(`http://localhost:9865/users/username/${document.querySelector("#username").value}`)
     const data = await responseFlow.json()
