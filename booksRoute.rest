@@ -6,13 +6,17 @@ GET http://localhost:9865/books/60b552d49f9b25226cc3f92e
 
 ###
 
-POST http://localhost:9865/books/
+GET http://localhost:9865/books/title/sdfg
+
+###
+
+POST http://localhost:9865/books
 Content-Type: application/json
 
 {
-  "title": "How to not get YEETED ON",
+  "title": "book",
   "summary": "Tired of being yeeted on? Read this book for help.",
-  "author": "E",
+  "author": "E"
 }
 
 ###

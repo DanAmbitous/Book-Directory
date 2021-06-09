@@ -18,7 +18,7 @@ document.addEventListener('click', event => {
 })
 
 async function getBook() {
-  const responseFlow = await fetch(`http://localhost:9865/books/${document.querySelector('#book-id').value}`)
+  const responseFlow = await fetch(`http://localhost:9865/books/title/${document.querySelector('#book-id').value}`)
   const data = await responseFlow.json()
   
   document.querySelector('.get-book').innerHTML = ""

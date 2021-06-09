@@ -22,6 +22,11 @@ router.get('/:id', getABook, (req, res) => {
   res.json(res.book)
 })
 
+//Getting one via title
+router.get('/title/:title', getBookByTitle, (req, res) => {
+  res.json(res.book)
+})
+
 //Creating one
 router.post('/', async (req, res) => {
   const book = new bookSchema({
@@ -32,6 +37,8 @@ router.post('/', async (req, res) => {
   })
 
   try {
+    console.log(book)
+
     const newBook = await book.save()
     res.status(201).json(newBook)
   } catch (error) {
@@ -113,6 +120,26 @@ async function getABook(req, res, next) {
 
   res.book = book
 
+  next()
+}
+
+async function getBookByTitle(req, res, next) {
+  try {
+    book = await bookSchema.find({title: req.params.title})
+
+    console.log(book)
+
+    if (book.length == 0) {
+      return res.status(404).json({message: `Can't find a book by the username of ${req.params.title}`})
+    }
+
+    book = book[0]
+
+  } catch (error) {
+    res.status(500).json({message: error.message})
+  }
+
+  res.book = book
   next()
 }
 

@@ -25,7 +25,7 @@ async function getAllBooks() {
 }
 
 async function getSpecificBook() {
-  const responseFlow = await fetch(`http://localhost:9865/books/${document.querySelector('#book-id').value}`)
+  const responseFlow = await fetch(`http://localhost:9865/books/title/${document.querySelector('#book-id').value}`)
   const theBook = await responseFlow.json()  
 
   document.querySelector('#book-output').innerHTML = `${theBook.title}<br>${theBook.summary}<br>${theBook.author}<br><img src="${theBook.image}" alt="${theBook.title}"><br>${theBook._id}`
@@ -53,8 +53,10 @@ async function postBook() {
 }
 
 async function deleteABook() {
-  const responseFlow = await fetch(`http://localhost:9865/books/${document.querySelector('#book-id-delete').value}`)
+  const responseFlow = await fetch(`http://localhost:9865/books/title/${document.querySelector('#book-id-delete').value}`)
   const data = await responseFlow.json()
+
+  const id = data._id
 
   const bookContainer = document.createElement('div')
   const title = document.createElement('h2')
@@ -75,7 +77,7 @@ async function deleteABook() {
   bookContainer.append(bookId)
   document.querySelector('.deleted-book').append(bookContainer)
 
-  fetch(`http://localhost:9865/books/${document.querySelector('#book-id-delete').value}`, {
+  fetch(`http://localhost:9865/books/${id}`, {
     method: 'DELETE'
   })
 
@@ -117,17 +119,22 @@ async function deleteAllBooks() {
   reGetBooks()
 }
 
-function editABook() {
+async function editABook() {
   const title = document.querySelector('#edit-title').value
   const summary = document.querySelector('#edit-summary').value
   const author = document.querySelector('#edit-author').value
   let image = document.querySelector('#patch-drop-down').querySelector('.dd-selected-image').src
 
-  console.log(image)
-
   const data = {title, summary, author, image}
 
-  fetch(`http://localhost:9865/books/${document.querySelector('#edit-books-id').value}`, {
+  const responseFlow = await fetch(`http://localhost:9865/books/title/${document.querySelector('#edit-books-id').value}`)
+  const jsonData = await responseFlow.json()
+
+  const id = jsonData._id
+
+  console.log(jsonData)
+
+  fetch(`http://localhost:9865/books/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
