@@ -2,15 +2,38 @@ const express = require('express')
 const router = express.Router()
 const bookSchema = require('../models/bookPrototype.js')
 
+const bookSamples = [
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''}
+]
+
+let i = 0
+
+bookSamples.forEach(book => {
+  i++
+
+  book.id = i
+  book.name = `Book ${i}`
+})
+
+router.get('/bookPagination', paginatedResults(bookSamples), (req, res) => {
+  res.json(res.paginatedResults)
+})
+
 //Getting all
 router.get('/', async (req, res) => {
   try {
     const books = await bookSchema.find()
-
-    await bookSchema.find(user => console.log(user))
-
-    console.log(books)
-
+    
     res.json(books)
   } catch (error) {
     res.status(500).json({message: error.message})
@@ -37,7 +60,7 @@ router.post('/', async (req, res) => {
   })
 
   try {
-    console.log(book)
+    // console.log(book)
 
     const newBook = await book.save()
     res.status(201).json(newBook)
@@ -118,8 +141,6 @@ async function getABook(req, res, next) {
     res.status(500).json({message: error.message})
   }
 
-  res.book = book
-
   next()
 }
 
@@ -127,7 +148,7 @@ async function getBookByTitle(req, res, next) {
   try {
     book = await bookSchema.find({title: req.params.title})
 
-    console.log(book)
+    // console.log(book)
 
     if (book.length == 0) {
       return res.status(404).json({message: `Can't find a book by the username of ${req.params.title}`})
@@ -141,6 +162,37 @@ async function getBookByTitle(req, res, next) {
 
   res.book = book
   next()
+}
+
+function paginatedResults(model) {
+  return async (req, res, next) => {
+    const page = Number(req.query.page)
+    const limit = Number(req.query.limit)
+  
+    const startIndex = (page- 1) * limit
+    const endIndex = page * limit
+  
+    const results = {}
+  
+    if (endIndex < model.length) {
+      results.next = {
+        page: page + 1,
+        limit: limit
+      }
+    }
+  
+    if (startIndex > 0) {
+      results.previous = {
+        page: page - 1,
+        limit: limit
+      }
+    }
+  
+    results.output = model.slice(startIndex, endIndex)
+  
+    res.paginatedResults = results
+    next()
+  }
 }
 
 module.exports = router

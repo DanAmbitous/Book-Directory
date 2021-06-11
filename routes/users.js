@@ -4,6 +4,33 @@ const User = require('../models/usersPrototype')
 
 const bcrypt = require('bcrypt')
 
+const userSample = [
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''}
+]
+
+let index = 0
+
+userSample.forEach(user => {
+  index++
+
+  user.id = index
+  user.name = `User ${index}`
+})
+
+router.get('/userPagination', paginatedResults(userSample), (req, res) => {
+  res.json(res.paginatedResults)
+})
+
 //Get all users
 router.get('/', getAllUsers, async (req, res) => {
   try {
@@ -164,6 +191,37 @@ async function getAllUsers(req, res, next) {
   res.users = users
 
   next()
+}
+
+function paginatedResults(model) {
+  return async (req, res, next) => {
+    const page = Number(req.query.page)
+    const limit = Number(req.query.limit)
+  
+    const startIndex = (page- 1) * limit
+    const endIndex = page * limit
+  
+    const results = {}
+  
+    if (endIndex < model.length) {
+      results.next = {
+        page: page + 1,
+        limit: limit
+      }
+    }
+  
+    if (startIndex > 0) {
+      results.previous = {
+        page: page - 1,
+        limit: limit
+      }
+    }
+  
+    results.output = model.slice(startIndex, endIndex)
+  
+    res.paginatedResults = results
+    next()
+  }
 }
 
 module.exports = router

@@ -24,12 +24,28 @@ async function getAllBooks() {
   } 
 }
 
+async function paginatedData() {
+  const responseFlow = await fetch(`http://localhost:9865/books/bookPagination?page=1&limit=10`)
+  const data = await responseFlow.json()
+
+  console.log(data)
+}
+
+paginatedData()
+
+
 async function getSpecificBook() {
+  if (document.querySelector('#book-id').value.length > 0) {
+  document.querySelector('.edit-message').innerHTML = ""
+
   const responseFlow = await fetch(`http://localhost:9865/books/title/${document.querySelector('#book-id').value}`)
   const theBook = await responseFlow.json()  
 
   document.querySelector('#book-output').innerHTML = `${theBook.title}<br>${theBook.summary}<br>${theBook.author}<br><img src="${theBook.image}" alt="${theBook.title}"><br>${theBook._id}`
-}
+  } else {
+    document.querySelector('.edit-message').innerHTML = "You need to provide the book's title"
+  }  
+} 
 
 async function postBook() {
   const title = document.querySelector('#title').value
