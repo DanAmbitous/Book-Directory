@@ -1,3 +1,5 @@
+const booksContainer = document.querySelector(".books-container")
+
 async function getAllBooks() {
   const responseFlow = await fetch('http://localhost:9865/books')
   const objectData = await responseFlow.json()
@@ -24,24 +26,39 @@ async function getAllBooks() {
   } 
 }
 
+let pageIndex = Number(document.querySelector('#page-index').innerHTML)
+
 async function paginatedData() {
-  const responseFlow = await fetch(`http://localhost:9865/books/bookPagination?page=1&limit=10`)
+  booksContainer.innerHTML = ""
+
+  const responseFlow = await fetch(`http://localhost:9865/books/bookPagination?page=${pageIndex}&limit=10`)
   const data = await responseFlow.json()
 
-  console.log(data)
+  const output = data.output
+
+  output.forEach(entry => {
+    console.log(entry)
+
+    const container = document.createElement('div')
+    const p = document.createElement('p')
+
+    p.innerHTML = entry.name
+    container.append(p)
+
+    booksContainer.append(container)
+  })
 }
 
 paginatedData()
 
-
 async function getSpecificBook() {
   if (document.querySelector('#book-id').value.length > 0) {
-  document.querySelector('.edit-message').innerHTML = ""
+    document.querySelector('.edit-message').innerHTML = ""
 
-  const responseFlow = await fetch(`http://localhost:9865/books/title/${document.querySelector('#book-id').value}`)
-  const theBook = await responseFlow.json()  
+    const responseFlow = await fetch(`http://localhost:9865/books/title/${document.querySelector('#book-id').value}`)
+    const theBook = await responseFlow.json()  
 
-  document.querySelector('#book-output').innerHTML = `${theBook.title}<br>${theBook.summary}<br>${theBook.author}<br><img src="${theBook.image}" alt="${theBook.title}"><br>${theBook._id}`
+    document.querySelector('#book-output').innerHTML = `${theBook.title}<br>${theBook.summary}<br>${theBook.author}<br><img src="${theBook.image}" alt="${theBook.title}"><br>${theBook._id}`
   } else {
     document.querySelector('.edit-message').innerHTML = "You need to provide the book's title"
   }  
@@ -161,25 +178,7 @@ async function editABook() {
   reGetBooks()
 }
 
-document.addEventListener('click', event => {
-  switch (event.target.id) {
-    case "specific-book-searcher":
-      getSpecificBook()
-      break
-    case "add-book":
-      postBook()
-      break
-    case "book-search-for-delete":
-      deleteABook()
-      break
-    case "delete-all":
-      deleteAllBooks()
-      break
-    case "edit-books-button":
-      editABook()
-      break
-  }
-})
+
 
 document.addEventListener('DOMContentLoaded', () => {
   getAllBooks()
@@ -187,13 +186,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 $('#book-covers').ddslick({
   onSelected: function(selectedData) {
-    console.log(selectedData.selectedData.value)
+    
   }   
 })
 
 $('#patch-drop-down').ddslick({
   onSelected: function(selectedData) {
-    console.log(selectedData.selectedData.value)
+    
   }   
 })
 
@@ -245,6 +244,47 @@ async function reGetBooks() {
   } 
 }
 
+document.addEventListener('click', event => {
+  switch (event.target.id) {
+    case "specific-book-searcher":
+      getSpecificBook()
+      break
+    case "add-book":
+      postBook()
+      break
+    case "book-search-for-delete":
+      deleteABook()
+      break
+    case "delete-all":
+      deleteAllBooks()
+      break
+    case "edit-books-button":
+      editABook()
+      break
+    case "next":
+      nextButton()
+      break
+    case "previous":
+      previousButton()
+      break
+  }
+})
+
+function nextButton() {
+  pageIndex++
+  paginatedData()
+
+  console.log(pageIndex)
+}
+
+function previousButton() {
+  pageIndex--
+  paginatedData()
+
+  console.log(pageIndex)
+}
+
+
 // To automatically fill up the input elements if a matched entry is found
 document.addEventListener('keyup', async event => {
   switch(event.target.id) {
@@ -269,7 +309,3 @@ document.addEventListener('keyup', async event => {
    break
   }
 })
-
-function autofill(entryIdentifier) {
-
-}
