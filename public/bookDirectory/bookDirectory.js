@@ -1,4 +1,5 @@
-const booksContainer = document.querySelector(".books-container")
+const booksContainer = document.querySelector("#books-container")
+let thePageIndex = document.querySelector('#page-index').innerHTML
 
 async function getAllBooks() {
   const responseFlow = await fetch('http://localhost:9865/books')
@@ -26,19 +27,18 @@ async function getAllBooks() {
   } 
 }
 
-let pageIndex = Number(document.querySelector('#page-index').innerHTML)
+let pageIndex = Number(thePageIndex)
 
-async function paginatedData() {
+async function paginatedData(index) {
   booksContainer.innerHTML = ""
+  thePageIndex = index
 
-  const responseFlow = await fetch(`http://localhost:9865/books/bookPagination?page=${pageIndex}&limit=10`)
+  const responseFlow = await fetch(`http://localhost:9865/books/bookPagination?page=${index}&limit=10`)
   const data = await responseFlow.json()
 
   const output = data.output
 
   output.forEach(entry => {
-    console.log(entry)
-
     const container = document.createElement('div')
     const p = document.createElement('p')
 
@@ -49,7 +49,44 @@ async function paginatedData() {
   })
 }
 
-paginatedData()
+paginatedData(pageIndex)
+
+async function nextButtonFunctionality() {
+  pageIndex++
+
+  paginatedData(pageIndex)
+
+  const responseFlowAhead = await fetch(`http://localhost:9865/books/bookPagination?page=${pageIndex + 1}&limit=10`)
+  const dataAhead = await responseFlowAhead.json()
+
+  const outputAhead = dataAhead.output
+
+  console.log(outputAhead)
+
+  if (outputAhead.length !== 0) {
+
+    paginatedData(pageIndex)
+  } else {
+    document.querySelector('#next').setAttribute('disabled', 'true')
+  }
+}
+
+async function previousButtonFunctionality() {
+  pageIndex--
+
+  paginatedData(pageIndex)
+
+  const responseFlowAhead = await fetch(`http://localhost:9865/books/bookPagination?page=${pageIndex - 1}&limit=10`)
+  const dataAhead = await responseFlowAhead.json()
+
+  const outputAhead = dataAhead.output
+
+  if (pageIndex !== 0) {
+    paginatedData(pageIndex)
+  } else {
+    document.querySelector('#previous').setAttribute('disabled', 'true')
+  }
+}
 
 async function getSpecificBook() {
   if (document.querySelector('#book-id').value.length > 0) {
@@ -271,19 +308,12 @@ document.addEventListener('click', event => {
 })
 
 function nextButton() {
-  pageIndex++
-  paginatedData()
-
-  console.log(pageIndex)
+  nextButtonFunctionality()
 }
 
 function previousButton() {
-  pageIndex--
-  paginatedData()
-
-  console.log(pageIndex)
+  previousButtonFunctionaltiy()
 }
-
 
 // To automatically fill up the input elements if a matched entry is found
 document.addEventListener('keyup', async event => {
