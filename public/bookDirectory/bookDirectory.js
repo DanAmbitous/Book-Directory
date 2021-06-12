@@ -23,7 +23,7 @@ async function getAllBooks() {
     bookImage.alt = `Cover of ${book.title}`
     bookContainer.append(bookImage)
     bookContainer.append(bookId)
-    document.querySelector('.books-container').append(bookContainer)
+    document.querySelector('#books-container').append(bookContainer)
   } 
 }
 
@@ -31,7 +31,7 @@ let pageIndex = Number(thePageIndex)
 
 async function paginatedData(index) {
   booksContainer.innerHTML = ""
-  thePageIndex = index
+  document.querySelector('#page-index').innerHTML = index
 
   const responseFlow = await fetch(`http://localhost:9865/books/bookPagination?page=${index}&limit=10`)
   const data = await responseFlow.json()
@@ -51,24 +51,15 @@ async function paginatedData(index) {
 
 paginatedData(pageIndex)
 
+// console.log(pageIndex + ' current page')
+
+
 async function nextButtonFunctionality() {
   pageIndex++
 
   paginatedData(pageIndex)
 
-  const responseFlowAhead = await fetch(`http://localhost:9865/books/bookPagination?page=${pageIndex + 1}&limit=10`)
-  const dataAhead = await responseFlowAhead.json()
-
-  const outputAhead = dataAhead.output
-
-  console.log(outputAhead)
-
-  if (outputAhead.length !== 0) {
-
-    paginatedData(pageIndex)
-  } else {
-    document.querySelector('#next').setAttribute('disabled', 'true')
-  }
+  initialPageIndexChecker()
 }
 
 async function previousButtonFunctionality() {
@@ -76,17 +67,41 @@ async function previousButtonFunctionality() {
 
   paginatedData(pageIndex)
 
-  const responseFlowAhead = await fetch(`http://localhost:9865/books/bookPagination?page=${pageIndex - 1}&limit=10`)
+  initialPageIndexChecker()
+}
+
+async function initialPageIndexChecker() {
+  const responseFlowAhead = await fetch(`http://localhost:9865/books/bookPagination?page=${pageIndex + 1}&limit=10`)
   const dataAhead = await responseFlowAhead.json()
+  const outputAhead = await dataAhead.output
 
-  const outputAhead = dataAhead.output
+  console.log(`${outputAhead.length} Ahead`)
 
-  if (pageIndex !== 0) {
-    paginatedData(pageIndex)
+  if (outputAhead.length !== 0) {
+    console.log('True?')
+    document.querySelector('#next').removeAttribute('disabled')
+    document.querySelector('#previous').removeAttribute('disabled')
+  } else {
+    document.querySelector('#next').setAttribute('disabled', 'true')
+    document.querySelector('#previous').removeAttribute('disabled')
+  }
+
+  const responseFlowBehind = await fetch(`http://localhost:9865/books/bookPagination?page=${pageIndex - 1}&limit=10`)
+  const dataBehind = await responseFlowBehind.json()
+  const outputBehind = await dataBehind.output
+
+  console.log(`${outputBehind.length} Behind`)
+
+  if (outputBehind.length !== 0) {
+    document.querySelector('#previous').removeAttribute('disabled')
+    // document.querySelector('#next').removeAttribute('disabled')
   } else {
     document.querySelector('#previous').setAttribute('disabled', 'true')
+    // document.querySelector('#next').removeAttribute('disabled')
   }
 }
+
+initialPageIndexChecker()
 
 async function getSpecificBook() {
   if (document.querySelector('#book-id').value.length > 0) {
@@ -158,10 +173,10 @@ async function deleteAllBooks() {
   const responseFlow = await fetch('http://localhost:9865/books')  
   const data = await responseFlow.json()
 
-  console.log(data)
+  // console.log(data)
 
   for (book of data) {  
-    console.log(book)  
+    // console.log(book)  
     const bookContainer = document.createElement('div')
     const title = document.createElement('h2')
     title.textContent = book.title
@@ -202,7 +217,7 @@ async function editABook() {
 
   const id = jsonData._id
 
-  console.log(jsonData)
+  // console.log(jsonData)
 
   fetch(`http://localhost:9865/books/${id}`, {
     method: 'PATCH',
@@ -312,7 +327,7 @@ function nextButton() {
 }
 
 function previousButton() {
-  previousButtonFunctionaltiy()
+  previousButtonFunctionality()
 }
 
 // To automatically fill up the input elements if a matched entry is found
