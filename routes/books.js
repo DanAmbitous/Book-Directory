@@ -148,8 +148,6 @@ async function getBookByTitle(req, res, next) {
   try {
     book = await bookSchema.find({title: req.params.title})
 
-    // console.log(book)
-
     if (book.length == 0) {
       return res.status(404).json({message: `Can't find a book by the username of ${req.params.title}`})
     }
@@ -165,11 +163,11 @@ async function getBookByTitle(req, res, next) {
 }
 
 function paginatedResults(model) {
-  return async (req, res, next) => {
+  return (req, res, next) => {
     const page = Number(req.query.page)
     const limit = Number(req.query.limit)
   
-    const startIndex = (page- 1) * limit
+    const startIndex = (page - 1) * limit
     const endIndex = page * limit
   
     const results = {}
@@ -180,7 +178,7 @@ function paginatedResults(model) {
         limit: limit
       }
     }
-  
+  ``
     if (startIndex > 0) {
       results.previous = {
         page: page - 1,
@@ -189,7 +187,7 @@ function paginatedResults(model) {
     }
   
     results.output = model.slice(startIndex, endIndex)
-  
+
     res.paginatedResults = results
     next()
   }
