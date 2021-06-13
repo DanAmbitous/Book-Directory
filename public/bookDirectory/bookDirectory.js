@@ -38,21 +38,32 @@ async function paginatedData(index) {
 
   const output = data.output
 
+  console.log({output})
+
   output.forEach(entry => {
-    const container = document.createElement('div')
-    const p = document.createElement('p')
+    let bookContainer = document.createElement('div')
+    let title = document.createElement('h3')
+    let bookCover = document.createElement('img')
+    let summary = document.createElement('p')
+    let author = document.createElement('p')
+    let br = document.createElement('br')
 
-    p.innerHTML = entry.name
-    container.append(p)
+    title = entry.title
+    bookCover.src = entry.image
+    summary = entry.summary
+    author = entry.author
 
-    booksContainer.append(container)
+    bookContainer.append(title)
+    bookContainer.append(bookCover)
+    bookContainer.append(summary)
+    bookContainer.append(author)
+    // bookContainer.append(br)
+
+    document.querySelector('#books-container').append(bookContainer)
   })
 }
 
-paginatedData(pageIndex)
-
-// console.log(pageIndex + ' current page')
-
+// paginatedData(pageIndex)
 
 async function nextButtonFunctionality() {
   pageIndex++
@@ -75,10 +86,7 @@ async function initialPageIndexChecker() {
   const dataAhead = await responseFlowAhead.json()
   const outputAhead = await dataAhead.output
 
-  console.log(`${outputAhead.length} Ahead`)
-
   if (outputAhead.length !== 0) {
-    console.log('True?')
     document.querySelector('#next').removeAttribute('disabled')
     document.querySelector('#previous').removeAttribute('disabled')
   } else {
@@ -90,18 +98,23 @@ async function initialPageIndexChecker() {
   const dataBehind = await responseFlowBehind.json()
   const outputBehind = await dataBehind.output
 
-  console.log(`${outputBehind.length} Behind`)
-
   if (outputBehind.length !== 0) {
     document.querySelector('#previous').removeAttribute('disabled')
-    // document.querySelector('#next').removeAttribute('disabled')
   } else {
     document.querySelector('#previous').setAttribute('disabled', 'true')
-    // document.querySelector('#next').removeAttribute('disabled')
   }
 }
 
 initialPageIndexChecker()
+
+async function testData() {
+  const responseFlow = await fetch(`http://localhost:9865/books/bookPagination?page=${pageIndex}&limit=10`)
+  const data = await responseFlow.json()
+
+  console.log(data)
+}
+
+testData()
 
 async function getSpecificBook() {
   if (document.querySelector('#book-id').value.length > 0) {

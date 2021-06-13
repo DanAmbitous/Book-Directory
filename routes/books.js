@@ -2,31 +2,36 @@ const express = require('express')
 const router = express.Router()
 const bookSchema = require('../models/bookPrototype.js')
 
-const bookSamples = [
-  {id: 0, name: ''},
-  {id: 0, name: ''},
-  {id: 0, name: ''},
-  {id: 0, name: ''},
-  {id: 0, name: ''},
-  {id: 0, name: ''},
-  {id: 0, name: ''},
-  {id: 0, name: ''},
-  {id: 0, name: ''},
-  {id: 0, name: ''},
-  {id: 0, name: ''}
+let bookSamples = [
+ 
 ]
 
-let i = 0
+async function getAllDocuments() {
+  const bookDocuments = await bookSchema.find()
 
-bookSamples.forEach(book => {
-  i++
+  bookDocuments.forEach(async bookDocument => bookSamples.push(bookDocument))
 
-  book.id = i
-  book.name = `Book ${i}`
-})
+  return bookDocuments
+}
+getAllDocuments().then(response => response) //{
+//   router.get('/bookPagination', paginatedResults(response), (req, res) => {
 
-router.get('/bookPagination', paginatedResults(bookSamples), (req, res) => {
-  res.json(res.paginatedResults)
+//   res.json(res.paginatedResults)
+//   })
+// })
+
+router.get('/bookPagination', async (req, res) => {
+  try {
+    const bookDocuments = await bookSchema.find()
+
+    console.log(bookDocuments)
+
+    // paginatedResults(bookSamples)
+  
+    res.json(res.paginatedResults)
+  } catch (error) {
+    res.json({message: error})
+  }
 })
 
 //Getting all
