@@ -2,37 +2,23 @@ const express = require('express')
 const router = express.Router()
 const bookSchema = require('../models/bookPrototype.js')
 
-let bookSamples = [
- 
-]
+async function getDocuments() {
+  const books = await bookSchema.find()
 
-async function getAllDocuments() {
-  const bookDocuments = await bookSchema.find()
-
-  bookDocuments.forEach(async bookDocument => bookSamples.push(bookDocument))
-
-  return bookDocuments
+  return books
 }
-getAllDocuments().then(response => response) //{
-//   router.get('/bookPagination', paginatedResults(response), (req, res) => {
 
-//   res.json(res.paginatedResults)
+getDocuments().then(data => {
+  router.get('/bookPagination', paginatedResults(data), (req, res) => {
+    res.json(res.paginatedResults)
+  })
+})
+
+// setTimeout(() => {
+//   router.get('/bookPagination', paginatedResults(), (req, res) => {
+//     res.json(res.paginatedResults)
 //   })
 // })
-
-router.get('/bookPagination', async (req, res) => {
-  try {
-    const bookDocuments = await bookSchema.find()
-
-    console.log(bookDocuments)
-
-    // paginatedResults(bookSamples)
-  
-    res.json(res.paginatedResults)
-  } catch (error) {
-    res.json({message: error})
-  }
-})
 
 //Getting all
 router.get('/', async (req, res) => {
@@ -65,8 +51,6 @@ router.post('/', async (req, res) => {
   })
 
   try {
-    // console.log(book)
-
     const newBook = await book.save()
     res.status(201).json(newBook)
   } catch (error) {
@@ -153,8 +137,6 @@ async function getBookByTitle(req, res, next) {
   try {
     book = await bookSchema.find({title: req.params.title})
 
-    // console.log(book)
-
     if (book.length == 0) {
       return res.status(404).json({message: `Can't find a book by the username of ${req.params.title}`})
     }
@@ -169,7 +151,7 @@ async function getBookByTitle(req, res, next) {
   next()
 }
 
-function paginatedResults(model) {
+async function paginatedResults(model) {
   return async (req, res, next) => {
     const page = Number(req.query.page)
     const limit = Number(req.query.limit)
