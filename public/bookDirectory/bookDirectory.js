@@ -23,7 +23,7 @@ async function getAllBooks() {
     bookImage.alt = `Cover of ${book.title}`
     bookContainer.append(bookImage)
     bookContainer.append(bookId)
-    document.querySelector('.books-container').append(bookContainer)
+    document.querySelector('#books-container').append(bookContainer)
   } 
 }
 
@@ -217,8 +217,6 @@ async function editABook() {
 
   reGetBooks()
 }
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
   getAllBooks()
