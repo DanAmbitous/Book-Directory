@@ -61,8 +61,6 @@ async function nextButtonFunctionality() {
 
   const outputAhead = dataAhead.output
 
-  console.log(outputAhead)
-
   if (outputAhead.length !== 0) {
     paginatedData(pageIndex)
   } else {
@@ -70,6 +68,8 @@ async function nextButtonFunctionality() {
     document.querySelector('#previous').removeAttribute('disabled')
   }
 }
+
+nextButtonFunctionality()
 
 async function previousButtonFunctionality() {
   pageIndex--
