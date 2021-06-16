@@ -64,10 +64,10 @@ async function nextButtonFunctionality() {
   console.log(outputAhead)
 
   if (outputAhead.length !== 0) {
-
     paginatedData(pageIndex)
   } else {
     document.querySelector('#next').setAttribute('disabled', 'true')
+    document.querySelector('#previous').removeAttribute('disabled')
   }
 }
 
@@ -81,12 +81,15 @@ async function previousButtonFunctionality() {
 
   const outputAhead = dataAhead.output
 
-  if (pageIndex !== 0) {
+  if (pageIndex !== 1) {
     paginatedData(pageIndex)
   } else {
     document.querySelector('#previous').setAttribute('disabled', 'true')
+    document.querySelector('#next').removeAttribute('disabled')
   }
 }
+
+previousButtonFunctionality()
 
 async function getSpecificBook() {
   if (document.querySelector('#book-id').value.length > 0) {
@@ -312,7 +315,7 @@ function nextButton() {
 }
 
 function previousButton() {
-  previousButtonFunctionaltiy()
+  previousButtonFunctionality()
 }
 
 // To automatically fill up the input elements if a matched entry is found
