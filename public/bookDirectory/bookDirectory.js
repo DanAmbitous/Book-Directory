@@ -70,7 +70,19 @@ async function nextButtonFunctionality() {
 
   paginatedData(pageIndex)
 
-  initialPageIndexChecker()
+  const responseFlowAhead = await fetch(`http://localhost:9865/books/bookPagination?page=${pageIndex + 1}&limit=10`)
+  const dataAhead = await responseFlowAhead.json()
+
+  const outputAhead = dataAhead.output
+
+  console.log(outputAhead)
+
+  if (outputAhead.length !== 0) {
+    paginatedData(pageIndex)
+  } else {
+    document.querySelector('#next').setAttribute('disabled', 'true')
+    document.querySelector('#previous').removeAttribute('disabled')
+  }
 }
 
 async function previousButtonFunctionality() {
@@ -98,23 +110,15 @@ async function initialPageIndexChecker() {
   const dataBehind = await responseFlowBehind.json()
   const outputBehind = await dataBehind.output
 
-  if (outputBehind.length !== 0) {
-    document.querySelector('#previous').removeAttribute('disabled')
+  if (pageIndex !== 1) {
+    paginatedData(pageIndex)
   } else {
     document.querySelector('#previous').setAttribute('disabled', 'true')
+    document.querySelector('#next').removeAttribute('disabled')
   }
 }
 
-initialPageIndexChecker()
-
-async function testData() {
-  const responseFlow = await fetch(`http://localhost:9865/books/bookPagination?page=${pageIndex}&limit=10`)
-  const data = await responseFlow.json()
-
-  console.log(data)
-}
-
-testData()
+previousButtonFunctionality()
 
 async function getSpecificBook() {
   if (document.querySelector('#book-id').value.length > 0) {
