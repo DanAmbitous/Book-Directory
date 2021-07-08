@@ -75,8 +75,6 @@ async function nextButtonFunctionality() {
 
   const outputAhead = dataAhead.output
 
-  console.log(outputAhead)
-
   if (outputAhead.length !== 0) {
     paginatedData(pageIndex)
   } else {
@@ -84,6 +82,8 @@ async function nextButtonFunctionality() {
     document.querySelector('#previous').removeAttribute('disabled')
   }
 }
+
+// nextButtonFunctionality()
 
 async function previousButtonFunctionality() {
   pageIndex--
@@ -118,7 +118,9 @@ async function initialPageIndexChecker() {
   }
 }
 
-previousButtonFunctionality()
+// document.querySelector()
+
+// previousButtonFunctionality()
 
 async function getSpecificBook() {
   if (document.querySelector('#book-id').value.length > 0) {
@@ -190,8 +192,11 @@ async function deleteAllBooks() {
   const responseFlow = await fetch('http://localhost:9865/books')  
   const data = await responseFlow.json()
 
+<<<<<<< HEAD
   // console.log(data)
 
+=======
+>>>>>>> production
   for (book of data) {  
     // console.log(book)  
     const bookContainer = document.createElement('div')
@@ -246,8 +251,6 @@ async function editABook() {
 
   reGetBooks()
 }
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
   getAllBooks()

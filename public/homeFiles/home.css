@@ -1,0 +1,91 @@
+body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  flex-direction: column;
+}
+
+h1 {
+  align-self: center;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+}
+
+/* .information-hover-section {
+  display: flex;
+  justify-content: flex-end;
+} */
+
+.information-hover-section {
+  text-align: end;
+}
+
+.visibilityOff {
+  visibility: hidden;
+}
+
+.container {
+  align-self: center;
+  display: flex;
+  align-items: flex-end;
+}
+
+.section {
+  margin: 1vw;
+  padding: 10vw;
+  cursor: pointer;  
+}
+
+/* 
+.information-hover-section {
+  position: relative;
+  display: inline-block;
+  text-align: end;
+  width: 44vw;
+}
+
+.information-hover-section .information {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.information-hover-section .information::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.information-hover-section:hover .information {
+  visibility: visible;
+  opacity: 1;
+}
+
+.information:hover {
+  display: block;
+} */
+
+.container .section {
+  flex-direction: row;
+  background-color: silver;
+}

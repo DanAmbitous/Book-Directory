@@ -3,6 +3,7 @@ const router = express.Router()
 const bookSchema = require('../models/bookPrototype.js')
 const mongoose = require('mongoose')
 
+<<<<<<< HEAD
 // const db = mongoose.connection
 // db.once('open', async () => {
 //   if (await bookSchema.countDocuments().exec() > 0) return
@@ -28,6 +29,42 @@ getDocuments().then(data => {
   router.get('/bookPagination', paginatedResults(data), (req, res) => {
     res.json(res.paginatedResults)
   })
+=======
+const bookSamples = [
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''},
+  {id: 0, name: ''}
+]
+
+let i = 0
+
+bookSamples.forEach(book => {
+  i++
+
+  book.id = i
+  book.name = `Book ${i}`
+})
+
+router.get('/bookPagination', async (req, res) => {
+  const books = await bookSchema.find()
+  
+  const page = Number(req.query.page)
+  const limit = Number(req.query.limit)
+
+  const startIndex = (page - 1) * limit
+  const endIndex = page * limit
+
+  const resultBooks = books.slice(startIndex, endIndex)
+  res.json(resultBooks)
+>>>>>>> production
 })
 
 // setTimeout(() => {
@@ -202,3 +239,4 @@ async function paginatedResults(model) {
 }
 
 module.exports = router
+

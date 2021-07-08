@@ -10,36 +10,67 @@
   <script type="text/javascript" src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js" defer></script>
   <script src="bookDirectory.js" defer></script>
   <link rel="icon" href="../images/icon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
   <title>Book Directory</title>
 </head>
 <body>
   <div id="input-container">
     <div class="grid-child">
       <form action="">
-        <div class="add-book-inputs">
-          <h1>Add a book</h1>
-          <label for="title">Title</label>
-          <input type="text" id="title" name="title" placeholder="Please enter book's title here" required>
-    
-          <label for="summary">Summary</label>
-          <input type="text" id="summary" name="summary" placeholder="Please enter book's summary here" required>
+        <div class="post-books-functionalites">
+          <h1>Post a book</h1>
           
-          <label for="author">Author</label>
-          <input type="text" id="author" name="author"  placeholder="Please enter book's author here" required>
-    
-          <select name="image" id="book-covers">
+          <div class="input-container"> 
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" placeholder="Please enter book's title here" required>
+          </div>
+
+          <div class="input-container">
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author"  placeholder="Please enter book's author here" required>
+          </div>
+
+          <div class="input-container">
+            <label for="tag">Genre</label>
+            <select name="tag" id="tag">
+              <option value="horror">Horror</option>
+              <option value="family">Family</option>
+              <option value="science-fictation">Science Fication</option>
+              <option value="comedy">Comedy</option>
+              <option value="fication">Fication</option>
+              <option value="non-fication">Non-fication</option>
+              <option value="self-help">Self-help</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="input-container">
+            <label for="summary">Summary</label>
+            <textarea type="text" id="summary" name="summary" placeholder="Please enter book's summary here" required></textarea>
+          </div>
+
+          <div class="input-container">
+            <label for="book-cover">Book Cover</label>
+            <input type="file" name="image" id="book-cover">
+          </div>
+
+          <!-- <select name="image" id="book-covers">
             <option value="choose-book-cover" data-imagesrc="https://i.postimg.cc/63Lv6pNX/Screenshot-2021-06-03-003820.jpg">Blank</option>
             <option value="book-cover-1" data-imagesrc="https://i.postimg.cc/7Zxxvp8G/Screenshot-2021-06-01-224838.jpg">Book cover 1</option>
             <option value="book-cover-2" data-imagesrc="https://i.postimg.cc/FKRH225F/Screenshot-2021-06-02-113222.jpg">Book cover 2</option>
             <option value="book-cover-3" data-imagesrc="https://i.postimg.cc/C1nLKkxW/Screenshot-2021-06-02-113243.jpg">Book cover 3</option>
-          </select>
+          </select> -->
     
-          <button type="submit" id="add-book">Add book</button>
+          <div class="input-container">
+            <button type="submit" id="post-book">Post book</button>
+          </div>
         </div>
       </form>
     </div>
     
-    <div class="grid-child">
+    <!-- <div class="grid-child">
       <div class="get-specific-book">
         <h2>Search Book</h2>
     
@@ -114,6 +145,6 @@
 
   <div id="books-container">
 
-  </div>
+  </div> -->
 </body>
 </html>
