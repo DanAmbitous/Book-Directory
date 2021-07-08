@@ -1,4 +1,4 @@
-.dropdown {
+/* .dropdown {
   position: relative; 
   display: inline-block;
   background-color: gray;
@@ -31,17 +31,42 @@
 
 .dropdown-content img {
   width: 100px;
-}
-
-button {
-  cursor: pointer;
-}
-
-.add-book-inputs {
-  display: flex;
-  flex-direction: column;
-}
+} */
 
 body {
   background-color: moccasin;
+  font-family: 'Oswald', sans-serif;
+}
+
+button, input {
+  cursor: pointer;
+}
+
+input {
+  padding: 0.5em;
+  font-size: 1em;
+}
+
+label {
+  font-size: 1.5rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+.input-container {
+  display: grid;
+  grid-template-columns: 100%;
+  margin-top: 1.5vh;
+}
+
+.post-books-functionalites > .input-containerk {
+  margin-top: 1vh;
+}
+
+#summary {
+  width: 100%;
+  height: 10vh;
+  resize: none;
 }

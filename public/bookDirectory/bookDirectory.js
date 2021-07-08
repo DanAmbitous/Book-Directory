@@ -69,7 +69,7 @@ async function nextButtonFunctionality() {
   }
 }
 
-nextButtonFunctionality()
+// nextButtonFunctionality()
 
 async function previousButtonFunctionality() {
   pageIndex--
@@ -89,7 +89,9 @@ async function previousButtonFunctionality() {
   }
 }
 
-previousButtonFunctionality()
+// document.querySelector()
+
+// previousButtonFunctionality()
 
 async function getSpecificBook() {
   if (document.querySelector('#book-id').value.length > 0) {
@@ -160,8 +162,6 @@ async function deleteABook() {
 async function deleteAllBooks() {
   const responseFlow = await fetch('http://localhost:9865/books')  
   const data = await responseFlow.json()
-
-  console.log(data)
 
   for (book of data) {  
     console.log(book)  

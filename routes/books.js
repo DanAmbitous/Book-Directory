@@ -3,21 +3,6 @@ const router = express.Router()
 const bookSchema = require('../models/bookPrototype.js')
 const mongoose = require('mongoose')
 
-// const db = mongoose.connection
-// db.once('open', async () => {
-//   if (await bookSchema.countDocuments().exec() > 0) return
-
-//   const bookDocuments = await bookSchema.find()
-
-//   bookDocuments.forEach(bookDocument => {
-//     Promise.all([
-//       bookSchema.create(bookDocument)
-//     ])
-//   })
-
-//   console.log('Added all book documents')
-// })
-
 const bookSamples = [
   {id: 0, name: ''},
   {id: 0, name: ''},
@@ -41,8 +26,17 @@ bookSamples.forEach(book => {
   book.name = `Book ${i}`
 })
 
-router.get('/bookPagination', paginatedResults(bookSamples), (req, res) => {
-  res.json(res.paginatedResults)
+router.get('/bookPagination', async (req, res) => {
+  const books = await bookSchema.find()
+  
+  const page = Number(req.query.page)
+  const limit = Number(req.query.limit)
+
+  const startIndex = (page - 1) * limit
+  const endIndex = page * limit
+
+  const resultBooks = books.slice(startIndex, endIndex)
+  res.json(resultBooks)
 })
 
 //Getting all
@@ -213,3 +207,4 @@ function paginatedResults(model) {
 }
 
 module.exports = router
+
