@@ -15,7 +15,11 @@ app.use(bodyParser.json());
 
 app.use(express.json())
 
-mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect(process.env.DATABASE_URL, { 
+  useUnifiedTopology: true,
+  useNewUrlParser: true, 
+  useCreateIndex: true
+})
 
 const db = mongoose.connection
 db.on('error', (error) => console.log(error))
@@ -27,6 +31,7 @@ app.use(express.static('public'))
 const booksRouter = require('./routes/books')
 app.use('/books', booksRouter)
 
+//Route for the users restAPI
 const usersRouter = require('./routes/users')
 app.use('/users', usersRouter)
 

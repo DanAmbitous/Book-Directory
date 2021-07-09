@@ -40,6 +40,8 @@ function bookRenderer(container, book) {
   const bookId = document.createElement('p')
   bookId.textContent = book._id
   const bookImage = document.createElement('img')
+  bookImage.height = 150
+  bookImage.width = 100
   bookImage.src = book.image
   bookImage.alt = `Cover of ${book.title}`
   bookContainer.append(bookImage)
