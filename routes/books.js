@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bookSchema = require('../models/bookPrototype.js')
 const mongoose = require('mongoose')
+const imageMimeType = ['image/jpeg', 'image/png', 'images/gif']
 
 <<<<<<< HEAD
 // const db = mongoose.connection
@@ -98,10 +99,13 @@ router.get('/title/:title', getBookByTitle, (req, res) => {
 router.post('/', async (req, res) => {
   const book = new bookSchema({
     title: req.body.title,
-    summary: req.body.summary,
     author: req.body.author,
+    summary: req.body.summary,
+    tag: req.body.tag,
     image: req.body.image
   })
+
+  saveCover(book, req.body.image)
 
   try {
     const newBook = await book.save()
@@ -235,6 +239,21 @@ async function paginatedResults(model) {
     } catch (error) {
       res.status(500).json({message: error.message})
     }
+  }
+}
+
+function saveCover(book, coverEncoded) {
+  try {
+    if (coverEncoded == null) return
+
+    const cover = JSON.parse(coverEncoded)
+  
+    if (cover != null || imageMimeTypes.includes(image.type)) {
+      book.image = new Buffer.from(cover.data, 'base64')
+      book.coverImageType = cover.type
+    }
+  } catch (error) {
+    console.log(errro)
   }
 }
 

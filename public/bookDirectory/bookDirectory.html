@@ -13,6 +13,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
+  <!--Filepond-->
+  <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+  <!--encode-->
+  <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js" defer></script>
+  <!--image preview-->
+  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+  <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js" defer></script>
+  <!--image resize-->
+  <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js" defer></script>
+  <!--Filepond-->
+  <script src="https://unpkg.com/filepond@^4/dist/filepond.js" defer></script>
+  <script src="./fileUpload.js" defer></script>
   <title>Book Directory</title>
 </head>
 <body>
@@ -29,7 +41,7 @@
 
           <div class="input-container">
             <label for="author">Author</label>
-            <input type="text" id="author" name="author"  placeholder="Please enter book's author here" required>
+            <input type="text" id="author" name="author" placeholder="Please enter book's author here" required>
           </div>
 
           <div class="input-container">
@@ -45,7 +57,7 @@
               <option value="other">Other</option>
             </select>
           </div>
-          
+
           <div class="input-container">
             <label for="summary">Summary</label>
             <textarea type="text" id="summary" name="summary" placeholder="Please enter book's summary here" required></textarea>
@@ -53,7 +65,7 @@
 
           <div class="input-container">
             <label for="book-cover">Book Cover</label>
-            <input type="file" name="image" id="book-cover">
+            <input type="file" name="image" id="book-cover" class="filepond">
           </div>
 
           <!-- <select name="image" id="book-covers">
