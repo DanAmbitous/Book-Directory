@@ -112,14 +112,10 @@ async function postBook() {
   const summary = document.querySelector('#summary').value
   const tag = document.querySelector('#tag').value
 
-  console.log(tag)
-
   // let image = document.querySelector('#book-covers').querySelector('.dd-selected-image').src
-  const image = document.querySelector('#book-cover').value
+  // const image = document.querySelector('#book-cover').value
 
-  // imageChecker(image)
-
-  const data = { title, author, summary, tag, image }
+  const data = { title, author, summary, tag, /*image*/ }
 
   fetch('http://localhost:9865/books', {
     method: 'POST',
