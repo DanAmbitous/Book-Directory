@@ -221,13 +221,10 @@ async function postBook() {
   const summary = document.querySelector('#summary').value
   const tag = document.querySelector('#tag').value
 
-  console.log(tag)
-
   // let image = document.querySelector('#book-covers').querySelector('.dd-selected-image').src
-  const image = document.querySelector('#book-cover').value
+  // const image = document.querySelector('#book-cover').value
 
-  // imageChecker(image)
-
+<<<<<<< HEAD
 <<<<<<< HEAD
 async function deleteAllBooks() {
   const responseFlow = await fetch('http://localhost:9865/books')  
@@ -286,6 +283,9 @@ async function editABook() {
     method: 'PATCH',
 =======
   const data = { title, author, summary, tag, image }
+=======
+  const data = { title, author, summary, tag, /*image*/ }
+>>>>>>> production
 
   fetch('http://localhost:9865/books', {
     method: 'POST',
