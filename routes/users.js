@@ -55,8 +55,6 @@ router.post("/", async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
-    // console.log(hashedPassword)
-    console.log(req + "asdf")
     const user = new User({
       username: req.body.username,
       password: hashedPassword,
@@ -229,3 +227,11 @@ function paginatedResults(model) {
 }
 
 module.exports = router
+
+function dateConverter(rawDate) {
+  console.log("work?")
+  console.log(rawDate)
+  let day = rawDate.getDay()
+
+  console.log(day)
+}

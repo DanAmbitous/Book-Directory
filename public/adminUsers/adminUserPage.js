@@ -5,14 +5,18 @@ async function getAllUsers() {
   document.querySelector("#get-all-users").innerHTML = ""
   console.log(data)
   data.forEach((user) => {
+    console.log(user.date)
     const userContainer = document.createElement("div")
     const username = document.createElement("h2")
     const role = document.createElement("p")
+    const joinedDate = document.createElement("p")
     const id = document.createElement("p")
+    const hr = document.createElement("hr")
     username.innerHTML = user.username
     role.innerHTML = user.role
+    joinedDate.innerHTML = user.date
     id.innerHTML = user._id
-    userContainer.append(username, role, id)
+    userContainer.append(username, role, joinedDate, id, hr)
     document.querySelector("#get-all-users").append(userContainer)
   })
 }

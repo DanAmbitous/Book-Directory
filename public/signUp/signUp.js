@@ -25,14 +25,17 @@ async function signUserUp() {
         document.querySelector("#username").value
       }`
     )
+
     const data = await responseFlow.json()
 
     if (data.role != "basic" && data.role != "admin") {
       const username = document.querySelector("#username").value
       const password = document.querySelector("#password").value
-      const date = Date.now()
+      let date = new Date()
+      date = date.toString()
+
       const data = { username, password, date }
-      console.log(date)
+
       fetch("http://localhost:9865/users", {
         method: "POST",
         headers: {

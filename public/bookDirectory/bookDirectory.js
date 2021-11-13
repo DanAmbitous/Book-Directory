@@ -1,3 +1,9 @@
+const booksContainer = document.querySelector(".books-container")
+const template = document.querySelector(".book-subcontainer")
+const removeParticularBook = document.querySelector("#remove-book")
+const removeAllBooks = document.querySelector("#clear-books")
+const postBookButton = document.querySelector("#post-book")
+
 // const booksContainer = document.querySelector("#books-container")
 // let thePageIndex = document.querySelector('#page-index').innerHTML
 
@@ -5,7 +11,7 @@
 //   const responseFlow = await fetch('http://localhost:9865/books')
 //   const objectData = await responseFlow.json()
 
-//   for (book of objectData) {    
+//   for (book of objectData) {
 //     const bookContainer = document.createElement('div')
 //     const title = document.createElement('h2')
 //     title.textContent = book.title
@@ -24,7 +30,7 @@
 //     bookContainer.append(bookImage)
 //     bookContainer.append(bookId)
 //     document.querySelector('#books-container').append(bookContainer)
-//   } 
+//   }
 // }
 
 // let pageIndex = Number(thePageIndex)
@@ -98,35 +104,64 @@
 //     document.querySelector('.edit-message').innerHTML = ""
 
 //     const responseFlow = await fetch(`http://localhost:9865/books/title/${document.querySelector('#book-id').value}`)
-//     const theBook = await responseFlow.json()  
+//     const theBook = await responseFlow.json()
 
 //     document.querySelector('#book-output').innerHTML = `${theBook.title}<br>${theBook.summary}<br>${theBook.author}<br><img src="${theBook.image}" alt="${theBook.title}"><br>${theBook._id}`
 //   } else {
 //     document.querySelector('.edit-message').innerHTML = "You need to provide the book's title"
-//   }  
-// } 
+//   }
+// }
+
+postBookButton.addEventListener("click", postBook)
 
 async function postBook() {
-  const title = document.querySelector('#title').value
-  const author = document.querySelector('#author').value
-  const summary = document.querySelector('#summary').value
-  const tag = document.querySelector('#tag').value
+  const title = document.querySelector("#title").value
+  const author = document.querySelector("#author").value
+  const summary = document.querySelector("#summary").value
+  const tag = document.querySelector("#tag").value
 
   // let image = document.querySelector('#book-covers').querySelector('.dd-selected-image').src
   // const image = document.querySelector('#book-cover').value
 
-  const data = { title, author, summary, tag, /*image*/ }
+  const data = { title, author, summary, tag /*image*/ }
 
-  fetch('http://localhost:9865/books', {
-    method: 'POST',
+  fetch("http://localhost:9865/books", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
 
-  // reGetBooks()
+  booksRenderer()
 }
+
+/*
+async function getAllUsers() {
+  const responseFlow = await fetch("http://localhost:9865/users")
+  const data = await responseFlow.json()
+
+  document.querySelector("#get-all-users").innerHTML = ""
+  console.log(data)
+  data.forEach((user) => {
+    console.log(user.date)
+    const userContainer = document.createElement("div")
+    const username = document.createElement("h2")
+    const role = document.createElement("p")
+    const joinedDate = document.createElement("p")
+    const id = document.createElement("p")
+    const hr = document.createElement("hr")
+    username.innerHTML = user.username
+    role.innerHTML = user.role
+    joinedDate.innerHTML = user.date
+    id.innerHTML = user._id
+    userContainer.append(username, role, joinedDate, id, hr)
+    document.querySelector("#get-all-users").append(userContainer)
+  })
+}
+
+getAllUsers()
+*/
 
 // async function deleteABook() {
 //   const responseFlow = await fetch(`http://localhost:9865/books/title/${document.querySelector('#book-id-delete').value}`)
@@ -161,11 +196,11 @@ async function postBook() {
 // }
 
 // async function deleteAllBooks() {
-//   const responseFlow = await fetch('http://localhost:9865/books')  
+//   const responseFlow = await fetch('http://localhost:9865/books')
 //   const data = await responseFlow.json()
 
-//   for (book of data) {  
-//     console.log(book)  
+//   for (book of data) {
+//     console.log(book)
 //     const bookContainer = document.createElement('div')
 //     const title = document.createElement('h2')
 //     title.textContent = book.title
@@ -184,7 +219,7 @@ async function postBook() {
 //     bookContainer.append(bookImage)
 //     bookContainer.append(bookId)
 //     document.querySelector('.deleted-all-books').append(bookContainer)
-//   } 
+//   }
 
 //   fetch('http://localhost:9865/books', {
 //     method: 'DELETE',
@@ -225,20 +260,20 @@ async function postBook() {
 
 // $('#book-covers').ddslick({
 //   onSelected: function(selectedData) {
-    
-//   }   
+
+//   }
 // })
 
 // $('#patch-drop-down').ddslick({
 //   onSelected: function(selectedData) {
-    
-//   }   
+
+//   }
 // })
 
 // function imageChecker(image) {
 //   if (image === 'https://i.postimg.cc/7Zxxvp8G/Screenshot-2021-06-01-224838.jpg') {
 //     image = 'https://i.postimg.cc/7Zxxvp8G/Screenshot-2021-06-01-224838.jpg'
-//   } 
+//   }
 
 //   if (image === 'https://i.postimg.cc/FKRH225F/Screenshot-2021-06-02-113222.jpg') {
 //     image = 'https://i.postimg.cc/FKRH225F/Screenshot-2021-06-02-113222.jpg'
@@ -261,7 +296,7 @@ async function postBook() {
 //   const responseFlow = await fetch('http://localhost:9865/books')
 //   const getData = await responseFlow.json()
 
-//   for (book of getData) {    
+//   for (book of getData) {
 //     const bookContainer = document.createElement('div')
 //     const title = document.createElement('h2')
 //     title.textContent = book.title
@@ -280,10 +315,10 @@ async function postBook() {
 //     bookContainer.append(bookImage)
 //     bookContainer.append(bookId)
 //     document.querySelector('.books-container').append(bookContainer)
-//   } 
+//   }
 // }
 
-document.addEventListener('click', event => {
+document.addEventListener("click", (event) => {
   switch (event.target.id) {
     // case "specific-book-searcher":
     //   getSpecificBook()
@@ -341,3 +376,89 @@ document.addEventListener('click', event => {
 //    break
 //   }
 // })
+
+// async function deleteSpecificUser() {
+//   const responseFlow = await fetch(
+//     `http://localhost:9865/users/username/${
+//       document.querySelector("#specific-user-input-delete").value
+//     }`
+//   )
+//   const data = await responseFlow.json()
+
+//   document.querySelector("#specific-user-input-delete").innerHTML = ""
+
+//   const userContainer = document.createElement("div")
+//   const username = document.createElement("h2")
+//   const role = document.createElement("p")
+//   const id = document.createElement("p")
+//   username.innerHTML = data.username
+//   role.innerHTML = data.role
+//   id.innerHTML = data._id
+//   userContainer.append(username, role, id)
+//   document
+//     .querySelector("#specific-user-container-delete")
+//     .append(userContainer)
+
+//   await fetch(
+//     `http://localhost:9865/users/${
+//       document.querySelector("#specific-user-input-delete").value
+//     }`,
+//     {
+//       method: "DELETE",
+//     }
+//   )
+
+//   getAllUsers()
+// }
+
+removeParticularBook.addEventListener("click", removeBook)
+async function removeBook() {
+  // const responseFlow = await fetch(
+  //   `http://localhost:9865/books/title/${
+  //     document.querySelector("#book-title-removal").value
+  //   }`
+  // )
+  // const data = await responseFlow.json()
+  // console.log(data)
+  // await fetch(
+  //   `http://localhost:9865/users/${
+  //     document.querySelector("#specific-user-input-delete").value
+  //   }`
+  // )
+}
+
+removeAllBooks.addEventListener("click", deleteAllBooks)
+async function deleteAllBooks() {
+  await fetch(`http://localhost:9865/books`, {
+    method: "DELETE",
+  })
+
+  getBooks()
+  booksRenderer()
+}
+
+async function getBooks() {
+  const responseFlow = await fetch("http://localhost:9865/books")
+  const books = await responseFlow.json()
+
+  return books
+}
+
+booksRenderer()
+async function booksRenderer() {
+  const books = await getBooks()
+
+  books.forEach((book) => {
+    const clone = template.content.cloneNode(true)
+    clone.querySelector(".title").textContent = book.title
+    clone.querySelector(".author").textContent = book.author
+    clone.querySelector(".summary").textContent = book.summary
+    const tagContainer = document.createElement("div")
+    tagContainer.textContent = book.tag
+    clone.querySelector(".tag").append(tagContainer)
+    clone.querySelector(".id").textContent = book._id
+    clone.querySelector(".book-container").dataset.title = book.title
+
+    booksContainer.append(clone)
+  })
+}

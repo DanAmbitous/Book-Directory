@@ -63,12 +63,12 @@
             <textarea type="text" id="summary" name="summary" placeholder="Please enter book's summary here" required></textarea>
           </div>
 
-          <div class="input-container">
+          <!-- <div class="input-container">
             <label for="book-cover">Book Cover</label>
-            <!-- <input type="file" name="image" id="book-cover" class="filepond"> -->
+            <input type="file" name="image" id="book-cover" class="filepond">
 
             
-          </div>
+          </div> -->
 
           <!-- <select name="image" id="book-covers">
             <option value="choose-book-cover" data-imagesrc="https://i.postimg.cc/63Lv6pNX/Screenshot-2021-06-03-003820.jpg">Blank</option>
@@ -80,6 +80,26 @@
           <div class="input-container">
             <button type="submit" id="post-book">Post book</button>
           </div>
+        </div>
+      </form>
+      <form action="/">
+        <h1>Remove a book</h1>
+
+        <div class="book-removal-container">
+          <div class="input-container">
+            <input type="text" placeholder="Please enter book's title here" id="book-title-removal">
+            <button id="remove-book">Remove Book</button>
+
+            <div class="removed-book-feedback">
+
+            </div>
+          </div>
+
+          <button id="clear-books">Remove all books</button>
+        </div>
+
+        <div class="books-container">
+          
         </div>
       </form>
     </div>
@@ -160,5 +180,15 @@
   <div id="books-container">
 
   </div> -->
+
+  <template class="book-subcontainer">
+    <div class="book-container">
+      <h3 class="title"></h3>
+      <h5 class="author"></h5>
+      <p class="summary"></p>
+      <div class="tag"></div>
+      <p class="id"></p>
+    </div>
+  </template>
 </body>
 </html>
