@@ -44,13 +44,9 @@ async function removeBook() {
   // removedBookContainer.append(clone)
   // booksRenderer()
 
-  console.log(removeIndiviualBookInput.value)
-  await fetch(
-    `http://localhost:9865/books/:id/${removeIndiviualBookInput.value}`,
-    {
-      method: "DELETE",
-    }
-  )
+  await fetch(`http://localhost:9865/books/${removeIndiviualBookInput.value}`, {
+    method: "DELETE",
+  })
 
   booksRenderer()
 }

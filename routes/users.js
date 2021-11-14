@@ -132,7 +132,6 @@ router.delete("/", getAllUsers, async (req, res) => {
 router.delete("/:id", getUser, (req, res) => {
   try {
     const username = user.username
-    console.log("hiasdasd")
     user.remove()
 
     res.json({ message: `Deleted ${username}` })
@@ -171,14 +170,11 @@ async function getUserByUsername(req, res, next) {
     }
 
     user = user[0]
-
-    console.log(user)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
 
   res.user = user
-  console.log(res.user)
   next()
 }
 
@@ -229,9 +225,5 @@ function paginatedResults(model) {
 module.exports = router
 
 function dateConverter(rawDate) {
-  console.log("work?")
-  console.log(rawDate)
   let day = rawDate.getDay()
-
-  console.log(day)
 }

@@ -18,17 +18,17 @@
 // })
 
 function postBooks() {
-  window.location.href = "http://localhost:9865/bookDirectory/bookDirectory.html"
+  window.location.href =
+    "http://localhost:9865/bookDirectory/bookDirectory.html"
 }
 
 function searchBooks() {
   window.location.href = "http://localhost:9865/basicUsers/basicUserPage.html"
 }
 
-document.addEventListener('click', event => {
-  switch(event.target.id) {
+document.addEventListener("click", (event) => {
+  switch (event.target.id) {
     case "post-books":
-      console.log('hi')
       postBooks()
       break
     case "search-books":

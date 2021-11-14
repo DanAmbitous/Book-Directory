@@ -3,7 +3,7 @@ async function getAllUsers() {
   const data = await responseFlow.json()
 
   document.querySelector("#get-all-users").innerHTML = ""
-  console.log(data)
+
   data.forEach((user) => {
     console.log(user.date)
     const userContainer = document.createElement("div")
