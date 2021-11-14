@@ -30,7 +30,6 @@
 <body>
   <div id="input-container">
     <div class="grid-child">
-      <form action="">
         <div class="post-books-functionalites">
           <h1>Post a book</h1>
           
@@ -62,27 +61,12 @@
             <label for="summary">Summary</label>
             <textarea type="text" id="summary" name="summary" placeholder="Please enter book's summary here" required></textarea>
           </div>
-
-          <!-- <div class="input-container">
-            <label for="book-cover">Book Cover</label>
-            <input type="file" name="image" id="book-cover" class="filepond">
-
-            
-          </div> -->
-
-          <!-- <select name="image" id="book-covers">
-            <option value="choose-book-cover" data-imagesrc="https://i.postimg.cc/63Lv6pNX/Screenshot-2021-06-03-003820.jpg">Blank</option>
-            <option value="book-cover-1" data-imagesrc="https://i.postimg.cc/7Zxxvp8G/Screenshot-2021-06-01-224838.jpg">Book cover 1</option>
-            <option value="book-cover-2" data-imagesrc="https://i.postimg.cc/FKRH225F/Screenshot-2021-06-02-113222.jpg">Book cover 2</option>
-            <option value="book-cover-3" data-imagesrc="https://i.postimg.cc/C1nLKkxW/Screenshot-2021-06-02-113243.jpg">Book cover 3</option>
-          </select> -->
     
           <div class="input-container">
             <button type="submit" id="post-book">Post book</button>
           </div>
         </div>
-      </form>
-      <form action="/">
+
         <h1>Remove a book</h1>
 
         <div class="book-removal-container">
@@ -90,7 +74,7 @@
             <input type="text" placeholder="Please enter book's title here" id="book-title-removal">
             <button id="remove-book">Remove Book</button>
 
-            <div class="removed-book-feedback">
+            <div id="removed-book-feedback">
 
             </div>
           </div>
@@ -101,7 +85,6 @@
         <div class="books-container">
           
         </div>
-      </form>
     </div>
     
     <!-- <div class="grid-child">
