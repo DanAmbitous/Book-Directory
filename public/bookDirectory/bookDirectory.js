@@ -28,20 +28,31 @@ async function postBook() {
 
 removeParticularBook.addEventListener("click", removeBook)
 async function removeBook() {
-  const responseFlow = await fetch(
-    `http://localhost:9865/books/title/${removeIndiviualBookInput.value}`
-  )
+  if (removeIndiviualBookInput.value.length === 0) {
+    alert("Please type in the name of the book to remove it")
+    return
+  }
 
-  const data = await responseFlow.json()
-  const clone = contentRendering(data, true)
+  removedBookContainer.textContent = ""
 
-  removedBookContainer.append(clone)
+  // const responseFlow = await fetch(
+  //   `http://localhost:9865/books/title/${removeIndiviualBookInput.value}`
+  // )
+  // const data = await responseFlow.json()
+
+  // const clone = contentRendering(data, true)
+  // removedBookContainer.append(clone)
+  // booksRenderer()
+
+  console.log(removeIndiviualBookInput.value)
   await fetch(
-    `http://localhost:9865/books/title/${removeIndiviualBookInput.value}`,
+    `http://localhost:9865/books/:id/${removeIndiviualBookInput.value}`,
     {
       method: "DELETE",
     }
   )
+
+  booksRenderer()
 }
 
 removeAllBooks.addEventListener("click", deleteAllBooks)
@@ -63,7 +74,6 @@ async function getBooks() {
 booksRenderer()
 async function booksRenderer() {
   booksContainer.textContent = ""
-  removedBookContainer.textContent = ""
 
   const books = await getBooks()
 

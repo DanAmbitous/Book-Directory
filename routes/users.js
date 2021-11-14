@@ -132,7 +132,7 @@ router.delete("/", getAllUsers, async (req, res) => {
 router.delete("/:id", getUser, (req, res) => {
   try {
     const username = user.username
-
+    console.log("hiasdasd")
     user.remove()
 
     res.json({ message: `Deleted ${username}` })
@@ -144,7 +144,7 @@ router.delete("/:id", getUser, (req, res) => {
 //Gets a specific entry (which is a user) from db by the id and returns it
 async function getUser(req, res, next) {
   try {
-    user = await User.findById(req.params.id)
+    let user = await User.findById(req.params.id)
 
     if (user == null) {
       return res
