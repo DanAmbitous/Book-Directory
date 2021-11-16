@@ -5,6 +5,7 @@ const removeIndiviualBookInput = document.querySelector("#book-title-removal")
 const removeAllBooks = document.querySelector("#clear-books")
 const postBookButton = document.querySelector("#post-book")
 const removedBookContainer = document.querySelector("#removed-book-feedback")
+const editBookButton = document.querySelector("#edit-book")
 
 postBookButton.addEventListener("click", postBook)
 async function postBook() {
@@ -24,6 +25,60 @@ async function postBook() {
   })
 
   booksRenderer()
+  clearInputs()
+}
+
+/*
+async function editSpecificUser() {
+  const username = document.querySelector("#specific-user-input-username").value
+  const role = document.querySelector("#specific-user-input-role").value
+
+  const responseFlow = await fetch(
+    `http://localhost:9865/users/username/${
+      document.querySelector("#specific-user-input-edit").value
+    }`
+  )
+  const jsonData = await responseFlow.json()
+  const id = jsonData._id
+
+  const data = { username, role }
+
+  await fetch(`http://localhost:9865/users/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+
+  getAllUsers()
+}
+*/
+
+editBookButton.addEventListener("click", editBook)
+async function editBook() {
+  const title = document.querySelector("#title").value
+  const author = document.querySelector("#author").value
+  const summary = document.querySelector("#summary").value
+  const tag = document.querySelector("#tag").value
+
+  const data = { title, author, summary, tag }
+
+  const booksResponseFlow = await fetch(
+    `http://localhost:9865/books/${title}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
+
+  const booksJsonData = await booksResponseFlow.json()
+  const id = booksJsonData._id
+
+  console.log(id)
+  clearInputs()
 }
 
 removeParticularBook.addEventListener("click", removeBook)
@@ -35,14 +90,21 @@ async function removeBook() {
 
   removedBookContainer.textContent = ""
 
-  // const responseFlow = await fetch(
-  //   `http://localhost:9865/books/title/${removeIndiviualBookInput.value}`
-  // )
-  // const data = await responseFlow.json()
+  const responseFlow = await fetch(
+    `http://localhost:9865/books/title/${removeIndiviualBookInput.value}`
+  )
+  const data = await responseFlow.json()
 
-  // const clone = contentRendering(data, true)
-  // removedBookContainer.append(clone)
-  // booksRenderer()
+  if (!data.title) {
+    alert(
+      `The book by the name of "${removeIndiviualBookInput.value}" doesn't exist`
+    )
+    return
+  }
+
+  const clone = contentRendering(data, true)
+  removedBookContainer.append(clone)
+  booksRenderer()
 
   await fetch(`http://localhost:9865/books/${removeIndiviualBookInput.value}`, {
     method: "DELETE",
@@ -96,4 +158,14 @@ function contentRendering(book, removed) {
   }
 
   return clone
+}
+
+function clearInputs() {
+  const inputs = document.querySelectorAll("input")
+
+  inputs.forEach((input) => {
+    input.value = ""
+  })
+
+  console.log("hi")
 }

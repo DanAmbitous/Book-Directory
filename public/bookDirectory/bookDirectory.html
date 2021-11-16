@@ -1,46 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <link rel="stylesheet" href="bookDirectory.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" defer></script>
-  <script type="text/javascript" src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js" defer></script>
-  <script src="bookDirectory.js" defer></script>
-  <link rel="icon" href="../images/icon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
-  <!--Filepond-->
-  <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-  <!--encode-->
-  <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js" defer></script>
-  <!--image preview-->
-  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
-  <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js" defer></script>
-  <!--image resize-->
-  <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js" defer></script>
-  <!--Filepond-->
-  <script src="https://unpkg.com/filepond@^4/dist/filepond.js" defer></script>
-  <script src="./fileUpload.js" defer></script>
-  <title>Book Directory</title>
-</head>
-<body>
-  <div id="input-container">
-    <div class="grid-child">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bookDirectory.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+      defer
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js"
+      defer
+    ></script>
+    <script src="bookDirectory.js" defer></script>
+    <link rel="icon" href="../images/icon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <!--Filepond-->
+    <link
+      href="https://unpkg.com/filepond@^4/dist/filepond.css"
+      rel="stylesheet"
+    />
+    <!--encode-->
+    <script
+      src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"
+      defer
+    ></script>
+    <!--image preview-->
+    <link
+      href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"
+      defer
+    ></script>
+    <!--image resize-->
+    <script
+      src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"
+      defer
+    ></script>
+    <!--Filepond-->
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js" defer></script>
+    <script src="./fileUpload.js" defer></script>
+    <title>Book Directory</title>
+  </head>
+  <body>
+    <div id="input-container">
+      <div class="grid-child">
         <div class="post-books-functionalites">
           <h1>Post a book</h1>
-          
-          <div class="input-container"> 
+
+          <div class="input-container">
             <label for="title">Title</label>
-            <input type="text" id="title" name="title" placeholder="Please enter book's title here" required>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Please enter book's title here"
+              required
+            />
           </div>
 
           <div class="input-container">
             <label for="author">Author</label>
-            <input type="text" id="author" name="author" placeholder="Please enter book's author here" required>
+            <input
+              type="text"
+              id="author"
+              name="author"
+              placeholder="Please enter book's author here"
+              required
+            />
           </div>
 
           <div class="input-container">
@@ -59,119 +102,100 @@
 
           <div class="input-container">
             <label for="summary">Summary</label>
-            <textarea type="text" id="summary" name="summary" placeholder="Please enter book's summary here" required></textarea>
+            <textarea
+              type="text"
+              id="summary"
+              name="summary"
+              placeholder="Please enter book's summary here"
+              required
+            ></textarea>
           </div>
-    
-          <div class="input-container">
+
+          <div class="edit-post-buttons input-container">
             <button type="submit" id="post-book">Post book</button>
+            <button type="submit" id="edit-book">Edit book</button>
           </div>
         </div>
 
-        <h1>Remove a book</h1>
-
         <div class="book-removal-container">
+          <h1>Remove a book</h1>
+
           <div class="input-container">
-            <input type="text" placeholder="Please enter book's title here" id="book-title-removal">
+            <input
+              type="text"
+              placeholder="Please enter book's title here"
+              id="book-title-removal"
+            />
             <button id="remove-book">Remove Book</button>
 
-            <div id="removed-book-feedback">
-
-            </div>
+            <div id="removed-book-feedback"></div>
           </div>
 
           <button id="clear-books">Remove all books</button>
-        </div>
+        </div>     
 
-        <div class="books-container">
-          
-        </div>
+      <div class="books-container"></div>
     </div>
-    
-    <!-- <div class="grid-child">
-      <div class="get-specific-book">
-        <h2>Search Book</h2>
-    
-        <label for="book-id">Book Title</label>
-        <input type="text" id="book-id" placeholder="Type in the book's id">
-        <button type="text" id="specific-book-searcher">Submit</button>
-    
-        <div id="book-output">
-    
-        </div>
+
+    <template class="book-subcontainer">
+      <div class="book-container">
+        <h3 class="title"></h3>
+        <h5 class="author"></h5>
+        <p class="summary"></p>
+        <div class="tag"></div>
+        <p class="id"></p>
       </div>
-    </div>
-
-    <div class="grid-child">
-      <div class="specific-delete-operation-container">
-        <h2>Delete a Book</h2>
-    
-        <label for="book-id-delete">Book Title</label>
-        <input type="text" id="book-id-delete" placeholder="Type in the book's id">
-        <button type="text" id="book-search-for-delete">Submit</button>
-    
-        <div class="deleted-book">
-    
-        </div>
-      </div>
-    </div> 
-  
-    <div class="grid-child">
-      <div class="delete-all-operation-container">
-        <h2>Delete all Books</h2>
-    
-        <button id="delete-all">Delete all Books</button>
-    
-        <div class="deleted-all-books">
-    
-        </div>
-      </div>
-    
-    </div>
-    
-    <div class="grid-child">
-      <div class="patch-operation-container">
-        <h2>Edit Books</h2>
-    
-        <label for="edit-books">Book Title</label>
-        <input type="text" id="edit-books-id" placeholder="Type in the book's id">
-        <input type="text" id="edit-title" placeholder="Edit the title">
-        <input type="text" id="edit-summary" placeholder="Edit the summary">
-        <input type="text" id="edit-author" placeholder="Edit the author">
-        <select name="image" id="patch-drop-down">
-          <option value="choose-book-cover" data-imagesrc="https://i.postimg.cc/63Lv6pNX/Screenshot-2021-06-03-003820.jpg">Blank</option>
-          <option value="book-cover-1" data-imagesrc="https://i.postimg.cc/7Zxxvp8G/Screenshot-2021-06-01-224838.jpg">Book cover 1</option>
-          <option value="book-cover-2" data-imagesrc="https://i.postimg.cc/FKRH225F/Screenshot-2021-06-02-113222.jpg">Book cover 2</option>
-          <option value="book-cover-3" data-imagesrc="https://i.postimg.cc/C1nLKkxW/Screenshot-2021-06-02-113243.jpg">Book cover 3</option>
-        </select>
-        <sub>Note: Leaving the inputs empty will remove the corresponding properties of the entry</sub>
-        <br>
-        <button type="text" id="edit-books-button">Submit</button>
-
-        <div class="edit-message">
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="navigation-buttons">
-    <button id="next">Next</button>
-    <p id="page-index">1</p>
-    <button id="previous">Previous</button>
-  </div>  
-
-  <div id="books-container">
-
-  </div> -->
-
-  <template class="book-subcontainer">
-    <div class="book-container">
-      <h3 class="title"></h3>
-      <h5 class="author"></h5>
-      <p class="summary"></p>
-      <div class="tag"></div>
-      <p class="id"></p>
-    </div>
-  </template>
-</body>
+    </template>
+  </body>
 </html>
+<!--   
+      <div class="input-container">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Please enter book's title here"
+              required
+            />
+          </div>
+  <div class="input-container">
+            <label for="author">Author</label>
+            <input
+              type="text"
+              id="author"
+              name="author"
+              placeholder="Please enter book's author here"
+              required
+            />
+          </div>
+
+          <div class="input-container">
+            <label for="tag">Genre</label>
+            <select name="tag" id="tag">
+              <option value="horror">Horror</option>
+              <option value="family">Family</option>
+              <option value="science-fictation">Science Fication</option>
+              <option value="comedy">Comedy</option>
+              <option value="fication">Fication</option>
+              <option value="non-fication">Non-fication</option>
+              <option value="self-help">Self-help</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="input-container">
+            <label for="summary">Summary</label>
+            <textarea
+              type="text"
+              id="summary"
+              name="summary"
+              placeholder="Please enter book's summary here"
+              required
+            ></textarea>
+          </div>
+
+          <div class="input-container">
+            <button type="submit" id="edit-book">Edit book</button>
+          </div>
+      </div> -->
